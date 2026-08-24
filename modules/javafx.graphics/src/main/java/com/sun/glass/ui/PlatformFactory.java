@@ -36,6 +36,7 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
 
 @Reachable(classNames = {
         "com.sun.glass.ui.gtk.GtkPlatformFactory",
+        "com.sun.glass.ui.headless.HeadlessPlatformFactory",
         "com.sun.glass.ui.ios.IosPlatformFactory",
         "com.sun.glass.ui.mac.MacPlatformFactory",
         "com.sun.glass.ui.monocle.MonoclePlatformFactory",

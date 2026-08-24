@@ -61,9 +61,11 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
         classNames = "com.sun.javafx.font.freetype.FTFactory")
 // types the glassgtk native library looks up with FindClass
 @Reachable(jniAccessible = true, classes = {
-        Boolean.class, IllegalStateException.class, Object.class, OutOfMemoryError.class,
-        Runnable.class, String.class, Throwable.class, java.util.ArrayList.class,
-        java.util.Collections.class, java.util.HashMap.class, Map.class })
+        Boolean.class, IllegalStateException.class, Iterable.class, Object.class,
+        OutOfMemoryError.class, Runnable.class, String.class, Throwable.class,
+        UnsupportedOperationException.class, java.nio.ByteBuffer.class, java.util.ArrayList.class,
+        java.util.Collections.class, java.util.HashMap.class, java.util.HashSet.class,
+        java.util.Iterator.class, Map.class, java.util.Set.class })
 final class GtkApplication extends Application implements
                                     InvokeLaterDispatcher.InvokeLaterSubmitter {
     private static final int forcedGtkVersion;

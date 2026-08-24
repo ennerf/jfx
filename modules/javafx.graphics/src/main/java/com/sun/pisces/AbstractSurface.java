@@ -27,6 +27,10 @@ package com.sun.pisces;
 
 import com.sun.prism.impl.Disposer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+// the prism_sw native library caches this class's field ids
+@Reachable(jniAccessible = true)
 public abstract class AbstractSurface implements Surface {
 
     private long nativePtr = 0L;
