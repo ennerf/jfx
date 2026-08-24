@@ -31,9 +31,12 @@ import com.sun.glass.ui.Window;
 
 import java.io.File;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MacOSX platform implementation class for CommonDialogs.
  */
+@Reachable(jniAccessible = true)
 final class MacCommonDialogs {
 
     private native static void _initIDs();

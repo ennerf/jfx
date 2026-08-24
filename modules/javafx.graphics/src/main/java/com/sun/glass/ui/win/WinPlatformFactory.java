@@ -33,6 +33,9 @@ import com.sun.glass.ui.delegate.ClipboardDelegate;
 import com.sun.glass.ui.delegate.MenuBarDelegate;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public final class WinPlatformFactory extends PlatformFactory {
 
     @Override public WinApplication createApplication() {

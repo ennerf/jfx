@@ -53,6 +53,9 @@ import com.sun.prism.PixelFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(bundles = "QuantumMessagesBundle")
 public class WindowStage extends GlassStage {
 
     protected Window platformWindow;

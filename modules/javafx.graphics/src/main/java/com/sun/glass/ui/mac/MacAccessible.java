@@ -51,10 +51,13 @@ import com.sun.glass.ui.Screen;
 import com.sun.glass.ui.View;
 import static javafx.scene.AccessibleAttribute.*;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Native Interface - Implements NSAccessibility Protocol
  *
  */
+@Reachable(jniAccessible = true)
 final class MacAccessible extends Accessible {
 
     private native static void _initIDs();
@@ -84,6 +87,7 @@ final class MacAccessible extends Accessible {
         }
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacAttribute {
         // Dynamic mapping to FX attribute, dynamic return type
         NSAccessibilityValueAttribute(null, null),
@@ -199,6 +203,7 @@ final class MacAccessible extends Accessible {
      * The Attribute and Action for roles are defined in
      * https://developer.apple.com/library/mac/documentation/UserExperience/Reference/Accessibility_RoleAttribute_Ref/Introduction.html
      */
+    @Reachable(jniAccessible = true)
     private static enum MacRole {
         NSAccessibilityUnknownRole(AccessibleRole.NODE, null, null),
         NSAccessibilityGroupRole(AccessibleRole.PARENT, null, null),
@@ -487,6 +492,7 @@ final class MacAccessible extends Accessible {
         }
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacSubrole {
         NSAccessibilityTableRowSubrole(AccessibleRole.LIST_ITEM, AccessibleRole.TABLE_ROW),
         NSAccessibilitySecureTextFieldSubrole(AccessibleRole.PASSWORD_FIELD),
@@ -539,6 +545,7 @@ final class MacAccessible extends Accessible {
         }
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacAction {
         NSAccessibilityCancelAction,
         NSAccessibilityConfirmAction,
@@ -567,6 +574,7 @@ final class MacAccessible extends Accessible {
         }
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacNotification {
         NSAccessibilityCreatedNotification,
         NSAccessibilityFocusedUIElementChangedNotification,
@@ -585,6 +593,7 @@ final class MacAccessible extends Accessible {
         ;long ptr; /* Initialized natively - treat as final */
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacOrientation {
         NSAccessibilityHorizontalOrientationValue,
         NSAccessibilityVerticalOrientationValue,
@@ -592,6 +601,7 @@ final class MacAccessible extends Accessible {
         ;long ptr; /* Initialized natively - treat as final */
     }
 
+    @Reachable(jniAccessible = true)
     private static enum MacText {
         NSAccessibilityBackgroundColorTextAttribute,
         NSAccessibilityForegroundColorTextAttribute,

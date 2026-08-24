@@ -32,9 +32,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.shape.Shape3D;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Shape3D.
  */
+@Reachable(classes = Shape3D.class, memberAccess = {})
 public abstract class Shape3DHelper extends NodeHelper {
 
     private static Shape3DAccessor shape3DAccessor;

@@ -34,9 +34,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Text.
  */
+@Reachable(classes = Text.class, memberAccess = {})
 public class TextHelper extends ShapeHelper {
 
     private static final TextHelper theInstance;

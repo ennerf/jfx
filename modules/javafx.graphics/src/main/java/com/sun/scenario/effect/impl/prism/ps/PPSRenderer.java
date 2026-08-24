@@ -64,6 +64,14 @@ import com.sun.scenario.effect.impl.prism.PrTexture;
 
 import static com.sun.scenario.effect.impl.Renderer.RendererState.*;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+// shader sources that createRenderer() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS, classNames = {
+        "com.sun.scenario.effect.impl.es2.ES2ShaderSource",
+        "com.sun.scenario.effect.impl.hw.d3d.D3DShaderSource",
+        "com.sun.scenario.effect.impl.hw.mtl.MTLShaderSource" })
 public class PPSRenderer extends PrRenderer {
 
     private ResourceFactory rf;

@@ -34,6 +34,9 @@ import java.util.Set;
 
 import java.nio.ByteBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public class Clipboard {
     /**
      * predefined mime types

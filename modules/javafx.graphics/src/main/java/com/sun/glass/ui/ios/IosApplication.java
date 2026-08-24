@@ -33,6 +33,17 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+// the platform font factory that PrismFontFactory.getFontFactory() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS,
+        classNames = "com.sun.javafx.font.coretext.CTFactory")
+// types the glass_ios native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, Runnable.class, String.class, Thread.class,
+        java.util.Map.class, java.util.Vector.class })
 public final class IosApplication extends Application {
 
     private static native void _initIDs(); // init IDs for java callbacks from native

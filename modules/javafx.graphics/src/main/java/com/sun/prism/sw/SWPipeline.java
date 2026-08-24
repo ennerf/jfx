@@ -36,6 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+// types the prism_sw native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        IllegalArgumentException.class, IllegalStateException.class, OutOfMemoryError.class })
 public final class SWPipeline extends GraphicsPipeline {
 
     static {

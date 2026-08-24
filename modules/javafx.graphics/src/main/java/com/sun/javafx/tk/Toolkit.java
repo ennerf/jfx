@@ -89,7 +89,13 @@ import com.sun.scenario.effect.FilterContext;
 import com.sun.scenario.effect.Filterable;
 import java.util.Optional;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+// the toolkit that getToolkit() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS,
+        classNames = "com.sun.javafx.tk.quantum.QuantumToolkit")
+@Reachable(classes = Image.class, memberAccess = {})
 public abstract class Toolkit {
     private static String tk;
     private static Toolkit TOOLKIT;

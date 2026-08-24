@@ -29,8 +29,11 @@ import com.sun.glass.ui.GestureSupport;
 import com.sun.glass.ui.TouchInputSupport;
 import com.sun.glass.ui.View;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 // Used from native code. When native event occurs (e.g. notifyBeginTouchEvent())
 // we are notified about it from native code through IosGestureSupport callbacks.
+@Reachable(jniAccessible = true)
 final class IosGestureSupport {
 
     private native static void _initIDs();

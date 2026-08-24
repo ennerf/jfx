@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.directwrite;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class D2D1_POINT_2F {
     D2D1_POINT_2F() {
     }

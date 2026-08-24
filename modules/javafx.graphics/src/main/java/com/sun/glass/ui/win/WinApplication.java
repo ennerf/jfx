@@ -40,6 +40,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+// the platform font factory that PrismFontFactory.getFontFactory() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS,
+        classNames = "com.sun.javafx.font.directwrite.DWFactory")
+// types the glass_win native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, IllegalAccessException.class, Object.class,
+        Runnable.class, String.class, Throwable.class, java.io.IOException.class,
+        java.util.Collections.class, java.util.HashMap.class, Map.class })
 final class WinApplication extends Application implements InvokeLaterDispatcher.InvokeLaterSubmitter {
 
     static float overrideUIScale;

@@ -33,6 +33,8 @@ import com.sun.javafx.util.Utils;
 import com.sun.javafx.tk.Toolkit;
 import javafx.beans.NamedArg;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 // NOTE: this definition, while correct, contains a lot of information which
 // is irrelevant to most developers. We should get to the basic definition and
 // usage patterns sooner.
@@ -106,6 +108,7 @@ import javafx.beans.NamedArg;
  *
  * @since JavaFX 2.0
  */
+@Reachable(jniAccessible = true)
 public final class Color extends Paint {
 
     /**

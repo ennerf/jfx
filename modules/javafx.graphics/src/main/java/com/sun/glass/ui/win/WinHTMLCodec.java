@@ -34,6 +34,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinHTMLCodec {
     public static final String defaultCharset = "UTF-8";
 

@@ -34,6 +34,9 @@ import com.sun.glass.ui.Window;
 import com.sun.glass.ui.HeaderButtonOverlay;
 import java.lang.annotation.Native;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class GtkWindow extends Window {
 
     public GtkWindow(Window owner, Screen screen, int styleMask) {

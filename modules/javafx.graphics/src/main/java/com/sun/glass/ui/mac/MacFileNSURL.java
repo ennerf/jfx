@@ -28,6 +28,8 @@ import com.sun.glass.ui.Application;
 
 import java.io.File;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * A descendant of the {@code File} class that also provides access to the
  * underlying native NSURL object associated with this File instance.
@@ -36,6 +38,7 @@ import java.io.File;
  * {@code CommonDialogs.show[File|Folder]Chooser()} methods if
  * the "glass.macosx.enableFileNSURL" system property is {@code true}.
  */
+@Reachable
 public final class MacFileNSURL extends File {
 
     private native static void _initIDs();

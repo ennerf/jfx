@@ -27,6 +27,11 @@ package com.sun.glass.ui.monocle;
 
 import java.util.ArrayList;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+// the filters named in addNamedFilter that are not constructed directly
+@Reachable(classes = LookaheadTouchFilter.class, memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS)
 class TouchPipeline {
 
     private TouchInput touch = TouchInput.getInstance();

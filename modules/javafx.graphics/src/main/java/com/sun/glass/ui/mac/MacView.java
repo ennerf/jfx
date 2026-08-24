@@ -36,9 +36,12 @@ import java.nio.IntBuffer;
 import java.util.Map;
 import java.util.TreeSet;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MacOSX platform implementation class for View.
  */
+@Reachable(jniAccessible = true)
 final class MacView extends View {
 
     private native static void _initIDs();

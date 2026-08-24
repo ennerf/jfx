@@ -42,6 +42,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class Window {
 
     public static class EventHandler {

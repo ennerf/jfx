@@ -29,9 +29,12 @@ import java.nio.IntBuffer;
 
 import com.sun.glass.ui.Pixels;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MacOSX platform implementation class for Pixels.
  */
+@Reachable
 final class MacPixels extends Pixels {
 
     private native static int _initIDs(); // returns the native format

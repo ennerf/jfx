@@ -42,9 +42,12 @@ import java.util.Map;
 import java.net.URL;
 import java.net.MalformedURLException;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * A loader for images on iOS platform.
  */
+@Reachable(jniAccessible = true)
 public class IosImageLoader extends ImageLoaderImpl {
 
     /** These constants must match with those in native */

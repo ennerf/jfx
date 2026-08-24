@@ -34,6 +34,9 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class GtkView extends View {
     private boolean imEnabled = false;
 

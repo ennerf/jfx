@@ -32,9 +32,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.LightBase;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of LightBase.
  */
+@Reachable(classes = LightBase.class, memberAccess = {})
 public class LightBaseHelper extends NodeHelper {
 
     private static final LightBaseHelper theInstance;

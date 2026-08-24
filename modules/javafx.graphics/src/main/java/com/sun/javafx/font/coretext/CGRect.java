@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.coretext;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class CGRect {
     CGPoint origin = new CGPoint();
     CGSize size = new CGSize();

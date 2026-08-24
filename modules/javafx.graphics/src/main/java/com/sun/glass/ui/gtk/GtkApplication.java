@@ -51,7 +51,19 @@ import java.util.concurrent.CountDownLatch;
 import java.util.function.Supplier;
 import java.lang.annotation.Native;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+
+@Reachable(jniAccessible = true)
+// the platform font factory that PrismFontFactory.getFontFactory() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS,
+        classNames = "com.sun.javafx.font.freetype.FTFactory")
+// types the glassgtk native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, IllegalStateException.class, Object.class, OutOfMemoryError.class,
+        Runnable.class, String.class, Throwable.class, java.util.ArrayList.class,
+        java.util.Collections.class, java.util.HashMap.class, Map.class })
 final class GtkApplication extends Application implements
                                     InvokeLaterDispatcher.InvokeLaterSubmitter {
     private static final int forcedGtkVersion;

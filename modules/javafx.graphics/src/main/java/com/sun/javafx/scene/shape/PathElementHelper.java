@@ -29,9 +29,12 @@ import com.sun.javafx.geom.Path2D;
 import com.sun.javafx.util.Utils;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of PathElement.
  */
+@Reachable(classes = PathElement.class, memberAccess = {})
 public abstract class PathElementHelper {
     private static PathElementAccessor pathElementAccessor;
 

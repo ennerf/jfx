@@ -70,6 +70,9 @@ import com.sun.javafx.scene.text.FontHelper;
 import com.sun.javafx.scene.text.TextLayout;
 import com.sun.javafx.tk.Toolkit;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
+
 /**
  * BE REALLY CAREFUL WITH RESTORING OR RESETTING STATE OF helper NODE AS LEFTOVER
  * STATE CAUSES REALLY ODD NASTY BUGS!
@@ -77,6 +80,7 @@ import com.sun.javafx.tk.Toolkit;
  * We expect all methods to set the Font property of helper but other than that
  * any properties set should be restored to defaults.
  */
+@Reachable(resources = { "*.txt", "caspian/**", "modena/**" })
 public class Utils {
 
     private static final Text textInstance = new Text();
@@ -986,6 +990,7 @@ public class Utils {
         }
     }
 
+    @ReachableMember
     public static URL getResource(String str) {
         return Utils.class.getResource(str);
     }

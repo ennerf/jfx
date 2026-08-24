@@ -40,6 +40,19 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+// the platform font factory that PrismFontFactory.getFontFactory() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS,
+        classNames = "com.sun.javafx.font.coretext.CTFactory")
+// types the glass_mac native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, Object.class, Runnable.class, String.class,
+        java.util.ArrayList.class, java.util.Collections.class,
+        java.util.HashMap.class, java.util.List.class, Map.class })
+@Reachable(bundles = "/com.apple.Cocoa")
 final class MacApplication extends Application implements InvokeLaterDispatcher.InvokeLaterSubmitter {
 
     private native static void _initIDs(boolean disableSyncRendering);

@@ -24,6 +24,9 @@
  */
 package com.sun.glass.ui;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public final class Size {
     public int width;
     public int height;

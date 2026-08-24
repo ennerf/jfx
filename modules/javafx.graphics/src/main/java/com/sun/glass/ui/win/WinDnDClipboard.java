@@ -24,6 +24,9 @@
  */
 package com.sun.glass.ui.win;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinDnDClipboard extends WinSystemClipboard {
     public WinDnDClipboard(String name) {
         super(name);

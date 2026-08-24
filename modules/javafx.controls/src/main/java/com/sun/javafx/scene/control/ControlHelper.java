@@ -31,9 +31,12 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * Used to access internal methods of Control.
  */
+@Reachable(classes = Control.class, memberAccess = {})
 public class ControlHelper extends RegionHelper {
     private static final ControlHelper theInstance;
     private static ControlAccessor controlAccessor;

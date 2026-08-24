@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.coretext;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class CGAffineTransform {
     double a;
     double b;

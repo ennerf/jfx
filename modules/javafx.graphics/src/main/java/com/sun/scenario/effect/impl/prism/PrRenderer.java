@@ -34,6 +34,13 @@ import com.sun.prism.RTTexture;
 import com.sun.scenario.effect.FilterContext;
 import com.sun.scenario.effect.impl.Renderer;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+// renderers that createRenderer() looks up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = {
+        "com.sun.scenario.effect.impl.prism.ps.PPSRenderer",
+        "com.sun.scenario.effect.impl.prism.sw.PSWRenderer" })
 public abstract class PrRenderer extends Renderer {
 
     /**
