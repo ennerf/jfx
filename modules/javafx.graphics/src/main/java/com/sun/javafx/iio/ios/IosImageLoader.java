@@ -48,6 +48,9 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
  * A loader for images on iOS platform.
  */
 @Reachable(jniAccessible = true)
+// types the javafx_iio native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = { InputStream.class, ClassNotFoundException.class,
+        IOException.class, OutOfMemoryError.class })
 public class IosImageLoader extends ImageLoaderImpl {
 
     /** These constants must match with those in native */

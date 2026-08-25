@@ -42,7 +42,8 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
         classNames = "com.sun.javafx.font.coretext.CTFactory")
 // types the glass_ios native library looks up with FindClass
 @Reachable(jniAccessible = true, classes = {
-        Boolean.class, Class.class, Runnable.class, String.class, Thread.class,
+        Boolean.class, Class.class, Integer.class, Long.class, Runnable.class,
+        RuntimeException.class, String.class, Thread.class,
         java.util.Map.class, java.util.Vector.class })
 public final class IosApplication extends Application {
 
