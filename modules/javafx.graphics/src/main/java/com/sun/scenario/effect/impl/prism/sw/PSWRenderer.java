@@ -48,8 +48,15 @@ import com.sun.scenario.effect.impl.prism.PrImage;
 import com.sun.scenario.effect.impl.prism.PrRenderer;
 import com.sun.scenario.effect.impl.sw.RendererDelegate;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 import static com.sun.scenario.effect.impl.Renderer.RendererState.*;
 
+// delegates that createJSWInstance() and createSSEInstance() look up by name
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS, classNames = {
+        "com.sun.scenario.effect.impl.sw.java.JSWRendererDelegate",
+        "com.sun.scenario.effect.impl.sw.sse.SSERendererDelegate" })
 public class PSWRenderer extends PrRenderer {
 
     private final Screen screen;
