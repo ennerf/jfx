@@ -1,0 +1,114 @@
+#
+# Builds the statically linked JavaFX SDK (-PSTATIC_BUILD=true, no media, no webkit) for every
+# desktop platform and uploads one zip per target in the layout Gluon Substrate expects under
+# ~/.gluon/substrate/javafxStaticSdk/<version>/<target>/: a top-level "sdk/" holding lib/ (jars and
+# the static libraries), legal/ and src.zip. The zip is named openjfx-<version>-<target>-static.zip
+# with the version taken from the SDK's own lib/javafx.properties.
+#
+# Derived from submit.yml. The build steps are the same except that the boot JDK comes from
+# setup-java, Cygwin is not installed (the sdk target does not need it), and the tests are not run.
+#
+
+name: Static JavaFX SDK
+
+on:
+  # The workflow_dispatch button only lists workflows that exist on the default branch, so a push
+  # to a build-static* branch is the way to run this from the fork. submit.yml runs on jfx*, so we
+  # use a name that does not trigger it.
+  push:
+    branches:
+      - 'build-static*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux-x86_64
+            runner: ubuntu-24.04
+          - target: linux-aarch64
+            runner: ubuntu-24.04-arm
+          - target: macos-x86_64
+            runner: macos-15-intel
+            xcode: /Applications/Xcode_16.0.app/Contents/Developer
+          - target: macos-aarch64
+            runner: macos-14
+            xcode: /Applications/Xcode_15.4.app/Contents/Developer
+          - target: windows-x86_64
+            runner: windows-2022
+
+    steps:
+      - name: Checkout the source
+        uses: actions/checkout@v4
+        with:
+          path: jfx
+
+      - name: Setup boot JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          set -x
+          sudo apt-get update
+          sudo apt-get install -y ant libgl1-mesa-dev libx11-dev libxxf86vm-dev libxt-dev pkg-config libgtk2.0-dev libgtk-3-dev libxtst-dev
+          gcc -v
+
+      - name: Select Xcode (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          set -x
+          sudo xcode-select --switch "${{ matrix.xcode }}"
+          xcodebuild -version
+
+      - name: Build the static SDK
+        working-directory: jfx
+        shell: bash
+        run: |
+          set -x
+          java -version
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            GRADLEW=./gradlew.bat
+            # Skip "chmod" task for GHA builds. See JDK-8354337 for details.
+            EXTRA_ARGS=-PCHMOD_ARTIFACTS=false
+          else
+            GRADLEW="bash gradlew"
+            EXTRA_ARGS=
+          fi
+          $GRADLEW -version
+          $GRADLEW --info --no-daemon -PSTATIC_BUILD=true -PCOMPILE_MEDIA=false -PCOMPILE_WEBKIT=false $EXTRA_ARGS sdk
+
+      - name: Package the SDK
+        id: package
+        working-directory: jfx/build
+        shell: bash
+        run: |
+          set -x
+          ls -l sdk/lib
+          version=$(sed -n 's/^javafx\.version=//p' sdk/lib/javafx.properties)
+          zip_name="openjfx-${version}-${{ matrix.target }}-static.zip"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            7z a -tzip "$zip_name" sdk
+          else
+            zip -qr "$zip_name" sdk
+          fi
+          ls -l "$zip_name"
+          echo "zip_name=$zip_name" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.package.outputs.zip_name }}
+          path: jfx/build/${{ steps.package.outputs.zip_name }}
+          compression-level: 0
+          if-no-files-found: error
