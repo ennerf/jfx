@@ -49,7 +49,8 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
         classNames = "com.sun.javafx.font.coretext.CTFactory")
 // types the glass_mac native library looks up with FindClass
 @Reachable(jniAccessible = true, classes = {
-        Boolean.class, Class.class, Object.class, Runnable.class, String.class,
+        Boolean.class, Class.class, Integer.class, Long.class, Object.class, Runnable.class,
+        RuntimeException.class, String.class, java.io.File.class,
         java.util.ArrayList.class, java.util.Collections.class,
         java.util.HashMap.class, java.util.List.class, Map.class })
 @Reachable(bundles = "/com.apple.Cocoa")
