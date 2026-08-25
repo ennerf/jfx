@@ -1310,7 +1310,8 @@ void commonModuleSetup(Project p, List<String> moduleChain) {
 // annotations have SOURCE retention, so only the generated META-INF/native-image
 // files end up in the modules.
 ext.REACHABILITY_MODULE = "us.hebi.graalvm.reachability.annotations"
-ext.REACHABILITY_ANNOTATED_MODULES = [ "javafx.base", "javafx.graphics", "javafx.controls" ]
+ext.REACHABILITY_ANNOTATED_MODULES = [ "javafx.base", "javafx.graphics", "javafx.controls", "javafx.fxml",
+                                       "jfx.incubator.input", "jfx.incubator.richtext" ]
 
 // Plain jars ('@jar') to keep the transitive pom closure out of the dependency verification
 configurations.create("reachabilityAnnotations")
@@ -3057,6 +3058,7 @@ project(":incubator.input") {
         'controls',
         'incubator.input'
     ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":base").sourceSets.test.output
@@ -3114,6 +3116,7 @@ project(":incubator.richtext") {
         'incubator.input',
         'incubator.richtext'
     ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":base").sourceSets.test.output
@@ -3296,7 +3299,7 @@ project(":fxml") {
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
 
     commonModuleSetup(project, [ 'base', 'graphics', 'controls', 'fxml' ])
-
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":graphics").sourceSets.test.output

@@ -46,6 +46,8 @@ import jfx.incubator.scene.control.richtext.model.StyleAttributeMap;
 import jfx.incubator.scene.control.richtext.model.StyledInput;
 import jfx.incubator.scene.control.richtext.model.StyledSegment;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Takes a sequence of RTF tokens and text and appends the text
  * described by the RTF to a <code>StyledDocument</code> (the <em>target</em>).
@@ -57,6 +59,7 @@ import jfx.incubator.scene.control.richtext.model.StyledSegment;
  * in order to guarantee that all of the text has been sent to
  * the text acceptor.
  */
+@Reachable(resources = "charsets/*.txt")
 public class RTFReader extends RTFParser {
     /** Indicates the domain of a Style */
     private static final Object STYLE_TYPE = new Object();
