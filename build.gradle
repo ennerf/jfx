@@ -1331,7 +1331,7 @@ void setupReachabilityMetadata(Project p) {
         compile.options.annotationProcessorPath = rootProject.configurations.reachabilityProcessor
         compile.options.compilerArgs.addAll([
             "-Aproject=org.openjfx/${p.moduleName}",
-            "-Areachability.outputFormat=1.2.0"
+            "-Areachability.outputFormat=1.0.0"
             ])
     }
 }
