@@ -39,12 +39,6 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import us.hebi.graalvm.reachability.annotations.MemberAccess;
-import us.hebi.graalvm.reachability.annotations.Reachable;
-
-// the platform font factory that PrismFontFactory.getFontFactory() looks up by name
-@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS,
-        classNames = "com.sun.javafx.font.freetype.FTFactory")
 public class HeadlessApplication extends Application {
 
     private final NestedRunnableProcessor processor = new NestedRunnableProcessor();
