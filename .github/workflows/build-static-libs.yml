@@ -1,15 +1,15 @@
 #
 # Builds the statically linked JavaFX SDK (-PSTATIC_BUILD=true, no media, no webkit) for every
-# desktop platform and uploads one zip per target in the layout Gluon Substrate expects under
-# ~/.gluon/substrate/javafxStaticSdk/<version>/<target>/: a top-level "sdk/" holding lib/ (jars and
-# the static libraries), legal/ and src.zip. The zip is named openjfx-<version>-<target>-static.zip
-# with the version taken from the SDK's own lib/javafx.properties.
+# desktop platform and uploads the two bundles. The workflow is derived from submit.yml, so the
+# build steps are the same except that the boot JDK comes from setup-java.
 #
-# Derived from submit.yml. The build steps are the same except that the boot JDK comes from
-# setup-java, Cygwin is not installed (the sdk target does not need it), and the tests are not run.
+# 1) one combined artifact holding every target for use in jfx-static-feature
+#
+# 2) one zip per target with the same name and layout as static libs for Gluon Substrate
+#    (minus monocle for linux-aarch64 builds as it is no longer supported)
 #
 
-name: Static JavaFX SDK
+name: Static JavaFX Libs
 
 on:
   # The workflow_dispatch button only lists workflows that exist on the default branch, so a push
@@ -35,10 +35,10 @@ jobs:
             runner: ubuntu-24.04
           - target: linux-aarch64
             runner: ubuntu-24.04-arm
-          - target: macos-x86_64
+          - target: darwin-x86_64
             runner: macos-15-intel
             xcode: /Applications/Xcode_16.0.app/Contents/Developer
-          - target: macos-aarch64
+          - target: darwin-aarch64
             runner: macos-14
             xcode: /Applications/Xcode_15.4.app/Contents/Developer
           - target: windows-x86_64
@@ -88,6 +88,7 @@ jobs:
           $GRADLEW -version
           $GRADLEW --info --no-daemon -PSTATIC_BUILD=true -PCOMPILE_MEDIA=false -PCOMPILE_WEBKIT=false $EXTRA_ARGS sdk
 
+      # Individual system libs in the Gluon Substrate format/layout
       - name: Package the SDK
         id: package
         working-directory: jfx/build
@@ -95,7 +96,7 @@ jobs:
         run: |
           set -x
           ls -l sdk/lib
-          version=$(sed -n 's/^javafx\.version=//p' sdk/lib/javafx.properties)
+          version=$(sed -n 's/^javafx\.version=//p' sdk/lib/javafx.properties | tr -d '\r')
           zip_name="openjfx-${version}-${{ matrix.target }}-static.zip"
           if [ "$RUNNER_OS" = "Windows" ]; then
             7z a -tzip "$zip_name" sdk
@@ -105,10 +106,48 @@ jobs:
           ls -l "$zip_name"
           echo "zip_name=$zip_name" >> "$GITHUB_OUTPUT"
 
+      # Upload individual libs
       - name: Upload the SDK
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.package.outputs.zip_name }}
+          name: ${{ matrix.target }}
           path: jfx/build/${{ steps.package.outputs.zip_name }}
           compression-level: 0
+          if-no-files-found: error
+
+  # Combines the static libs into a single artifact that can be easily depended on. The size
+  # overhead of per-platform to combined-platforms is negligible, but this is easier to deal with
+  combine:
+    name: combined
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download every target
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Assemble one tree
+        id: combine
+        shell: bash
+        run: |
+          set -x
+          for dir in artifacts/*/; do
+            target=$(basename "$dir")
+            mkdir -p "combined/$target"
+            unzip -q "$dir"/*.zip -d "combined/$target"
+            rm -rf "combined/$target/sdk/src.zip" "combined/$target/sdk/bin"
+          done
+          # Read the shared text files from linux to guarantee consistent line endings
+          version=$(sed -n 's/^javafx\.version=//p' combined/linux-x86_64/sdk/lib/javafx.properties | tr -d '\r')
+          du -sh combined
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      # The archives are uncompressed in the SDK and make up most of what is left, so this is worth
+      # the time it costs: about 47 MB of them come down to 10 MB
+      - name: Upload the combined SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: openjfx-${{ steps.combine.outputs.version }}-static
+          path: combined
           if-no-files-found: error
