@@ -28,9 +28,6 @@ import com.sun.glass.ui.TouchInputSupport;
 import com.sun.glass.ui.GestureSupport;
 import com.sun.glass.ui.View;
 
-import us.hebi.graalvm.reachability.annotations.Reachable;
-
-@Reachable(jniAccessible = true)
 final class MacGestureSupport {
 
     private native static void _initIDs();

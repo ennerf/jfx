@@ -39,8 +39,7 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
  * MS Windows platform implementation class for Window.
  */
 @Reachable(jniAccessible = true)
-// looked up by name from the native _createWindow (ViewContainer.cpp)
-@Reachable(jniAccessible = true, classes = WinGestureSupport.class)
+@Reachable(jniAccessible = true, classes = WinGestureSupport.class) // ViewContainer.cpp
 class WinWindow extends Window {
     public static final int RESIZE_DISABLE = 0;
     public static final int RESIZE_AROUND_ANCHOR = 1;
