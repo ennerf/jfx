@@ -3,7 +3,9 @@
 # desktop platform and uploads the two bundles. The workflow is derived from submit.yml, so the
 # build steps are the same except that the boot JDK comes from setup-java.
 #
-# 1) one combined artifact holding every target for use in jfx-static-feature
+# 1) one combined artifact holding every target for use in jfx-static-feature. A manual run also
+#    publishes it and the per-target zips as a GitHub release named <version>-<commit>, which is
+#    what jfx-static-libs downloads
 #
 # 2) one zip per target with the same name and layout as static libs for Gluon Substrate
 #    (minus monocle for linux-aarch64 builds as it is no longer supported)
@@ -11,14 +13,17 @@
 
 name: Static JavaFX Libs
 
+# Workflows in new branches don't show up on the Github UI, so we also need a branch trigger
 on:
-  # The workflow_dispatch button only lists workflows that exist on the default branch, so a push
-  # to a build-static* branch is the way to run this from the fork. submit.yml runs on jfx*, so we
-  # use a name that does not trigger it.
   push:
     branches:
       - 'build-static*'
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the combined SDK as a GitHub release
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -121,6 +126,8 @@ jobs:
     name: combined
     needs: build
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - name: Download every target
         uses: actions/download-artifact@v4
@@ -151,3 +158,20 @@ jobs:
           name: openjfx-${{ steps.combine.outputs.version }}-static
           path: combined
           if-no-files-found: error
+
+      # The combined zip has the hash in its name so a stale download is never reused. The per-target
+      # zips keep their Gluon names, so the release directory could work as a Substrate download URL
+      - name: Publish the release
+        if: inputs.publish || github.event_name == 'push'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -x
+          version="${{ steps.combine.outputs.version }}"
+          tag="$version-${GITHUB_SHA::10}"
+          zip_name="openjfx-$tag-static.zip"
+          (cd combined && zip -qr "../$zip_name" .)
+          gh release create "$tag" "$zip_name" artifacts/*/*.zip --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease \
+            --title "Static JavaFX $version ($GITHUB_REF_NAME)" \
+            --notes "Statically linked JavaFX SDK of every desktop platform, built from $GITHUB_SHA on $GITHUB_REF_NAME."
