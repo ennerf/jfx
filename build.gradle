@@ -4884,6 +4884,13 @@ task javadoc(type: Javadoc, dependsOn: [createMSPfile, createOverviewFile]) {
         new File(rootProject.buildDir,MODULESOURCEPATH)
         ]);
 
+    // The annotations are not in any module-info, so javadoc needs the same module graph
+    // patches as the compile tasks, see addReachabilityAnnotations()
+    options.modulePath = [ rootProject.configurations.reachabilityAnnotations.singleFile ]
+    options.addStringOption("-add-modules", REACHABILITY_MODULE)
+    options.addMultilineStringsOption("-add-reads").setValue(
+        REACHABILITY_ANNOTATED_MODULES.collect { "${it}=${REACHABILITY_MODULE}".toString() })
+
     doLast {
         projectsToDocument.each { p ->
             def destDir = "$buildDir/javadoc/${p.ext.moduleName}"
