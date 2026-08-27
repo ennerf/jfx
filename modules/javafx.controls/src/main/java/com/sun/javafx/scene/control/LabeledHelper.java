@@ -27,9 +27,12 @@ package com.sun.javafx.scene.control;
 import javafx.scene.control.Labeled;
 import com.sun.javafx.util.Utils;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Labeled Helper.
  */
+@Reachable(classes = Labeled.class, memberAccess = {})
 public class LabeledHelper {
     /** Accessor */
     public interface Accessor {

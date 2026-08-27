@@ -27,6 +27,9 @@ package com.sun.pisces;
 
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public final class JavaSurface extends AbstractSurface {
 
     private IntBuffer dataBuffer;

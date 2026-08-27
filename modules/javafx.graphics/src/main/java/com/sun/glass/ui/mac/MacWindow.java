@@ -35,9 +35,12 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.layout.HeaderBar;
 import java.nio.ByteBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MacOSX platform implementation class for Window.
  */
+@Reachable(jniAccessible = true)
 final class MacWindow extends Window {
 
     private native static void _initIDs();

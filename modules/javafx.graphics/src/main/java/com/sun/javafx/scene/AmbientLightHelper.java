@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.AmbientLight;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of AmbientLight.
  */
+@Reachable(classes = AmbientLight.class, memberAccess = {})
 public class AmbientLightHelper extends LightBaseHelper {
 
     private static final AmbientLightHelper theInstance;

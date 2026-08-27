@@ -29,9 +29,12 @@ import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.richtext.model.StyleAttribute;
 import jfx.incubator.scene.control.richtext.model.StyleAttributeMap;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Provides access to private methods in StyleAttributeMap.
  */
+@Reachable(classes = StyleAttributeMap.class, memberAccess = {})
 public class StyleAttributeMapHelper {
     public interface Accessor {
         public StyleAttributeMap filterAttributes(StyleAttributeMap ss, boolean isParagraph);

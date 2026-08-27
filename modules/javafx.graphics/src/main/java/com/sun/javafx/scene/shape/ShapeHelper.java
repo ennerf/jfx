@@ -35,9 +35,12 @@ import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Shape.
  */
+@Reachable(classes = Shape.class, memberAccess = {})
 public abstract class ShapeHelper extends NodeHelper {
     private static ShapeAccessor shapeAccessor;
 

@@ -31,9 +31,12 @@ import jfx.incubator.scene.control.richtext.TextPos;
 import jfx.incubator.scene.control.richtext.model.StyledInput;
 import jfx.incubator.scene.control.richtext.model.StyledTextModel;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Provides access to internal methods in StyledTextModel.
  */
+@Reachable(classes = StyledTextModel.class, memberAccess = {})
 public class StyledTextModelHelper {
     public interface Accessor {
         public TextPos replace(StyledTextModel m, StyleResolver r, TextPos start, TextPos end, StyledInput in, boolean allowUndo, boolean isEdit);

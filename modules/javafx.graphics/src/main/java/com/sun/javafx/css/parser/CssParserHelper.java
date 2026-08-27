@@ -29,6 +29,9 @@ import com.sun.javafx.util.Utils;
 import javafx.css.CssParser;
 import javafx.css.Size;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = CssParser.class, memberAccess = {})
 public final class CssParserHelper {
 
     private static Accessor accessor;

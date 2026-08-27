@@ -37,11 +37,14 @@ import java.util.HashMap;
 import com.sun.prism.ps.Shader;
 import com.sun.prism.ps.ShaderFactory;
 
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
+
 public class $shaderName$_Loader {
 
     private $shaderName$_Loader() {
     }
 
+    @ReachableMember(condition = ShaderFactory.class)
     public static Shader loadShader(ShaderFactory factory,
                                     String pixelShaderName,
                                     InputStream pixelShaderCode)

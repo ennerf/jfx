@@ -29,9 +29,12 @@ import com.sun.javafx.tk.TKClipboard;
 import com.sun.javafx.util.Utils;
 import javafx.scene.input.Dragboard;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Dragboard.
  */
+@Reachable(classes = Dragboard.class, memberAccess = {})
 public class DragboardHelper {
     private static DragboardAccessor dragboardAccessor;
 

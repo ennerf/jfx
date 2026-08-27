@@ -34,9 +34,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Line.
  */
+@Reachable(classes = Line.class, memberAccess = {})
 public class LineHelper extends ShapeHelper {
 
     private static final LineHelper theInstance;

@@ -33,9 +33,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Canvas.
  */
+@Reachable(classes = Canvas.class, memberAccess = {})
 public class CanvasHelper extends NodeHelper {
     private static final CanvasHelper theInstance;
     private static CanvasAccessor canvasAccessor;

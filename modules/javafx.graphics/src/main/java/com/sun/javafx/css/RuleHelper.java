@@ -29,6 +29,9 @@ import com.sun.javafx.util.Utils;
 import com.sun.javafx.css.media.MediaRule;
 import javafx.css.Rule;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = Rule.class, memberAccess = {})
 public final class RuleHelper {
 
     private RuleHelper() {}

@@ -31,6 +31,9 @@ import java.time.ZoneId;
 import java.util.Arrays;
 import javafx.geometry.Bounds;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class MacVariant {
     @Native final static int NSArray_id = 1;
     @Native final static int NSArray_NSString = 2;

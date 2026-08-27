@@ -27,6 +27,9 @@ package com.sun.javafx.scene.control.skin.resources;
 
 import java.util.ResourceBundle;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(bundles = { "controls", "controls-nt" })
 public final class ControlResources {
 
     // Translatable properties

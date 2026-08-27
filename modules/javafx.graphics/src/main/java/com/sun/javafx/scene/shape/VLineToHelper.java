@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.shape.VLineTo;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of VLineTo.
  */
+@Reachable(classes = VLineTo.class, memberAccess = {})
 public class VLineToHelper extends PathElementHelper {
 
     private static final VLineToHelper theInstance;

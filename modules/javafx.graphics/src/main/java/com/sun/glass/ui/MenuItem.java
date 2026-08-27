@@ -27,8 +27,11 @@ package com.sun.glass.ui;
 import com.sun.glass.events.KeyEvent;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 public final class MenuItem {
 
+    @Reachable(jniAccessible = true)
     public interface Callback {
         public void action();
 

@@ -28,10 +28,13 @@ package com.sun.javafx.stage;
 import com.sun.javafx.util.Utils;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 
 /**
  * Used to access internal window methods.
  */
+@Reachable(classes = EmbeddedWindow.class, memberAccess = {})
 public class EmbeddedWindowHelper extends WindowHelper {
     private static final EmbeddedWindowHelper theInstance;
     private static EmbeddedWindowAccessor embeddedWindowAccessor;

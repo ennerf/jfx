@@ -33,9 +33,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.scene.Node;
 import javafx.scene.effect.BlendMode;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of javafx.scene.effect.Effect.
  */
+@Reachable(classNames = "javafx.scene.effect.Effect", memberAccess = {})
 public class EffectHelper {
 
     private static EffectAccessor effectAccessor;
