@@ -1306,6 +1306,76 @@ void commonModuleSetup(Project p, List<String> moduleChain) {
     }
 }
 
+// GraalVM reachability metadata generated from @Reachable annotations. The
+// annotations have SOURCE retention, so only the generated META-INF/native-image
+// files end up in the modules.
+ext.REACHABILITY_MODULE = "us.hebi.graalvm.reachability.annotations"
+ext.REACHABILITY_ANNOTATED_MODULES = [ "javafx.base", "javafx.graphics", "javafx.controls", "javafx.fxml",
+                                       "jfx.incubator.input", "jfx.incubator.richtext" ]
+
+// Plain jars ('@jar') to keep the transitive pom closure out of the dependency verification
+configurations.create("reachabilityAnnotations")
+configurations.create("reachabilityProcessor")
+dependencies {
+    reachabilityAnnotations "us.hebi.graalvm:reachability-annotations:${reachabilityVersion}@jar"
+    reachabilityProcessor "us.hebi.graalvm:reachability-processor:${reachabilityVersion}@jar"
+    reachabilityProcessor "us.hebi.graalvm:reachability-annotations:${reachabilityVersion}@jar"
+    reachabilityProcessor "us.hebi.quickbuf:quickbuf-runtime:${quickbufVersion}@jar"
+}
+
+// Runs the annotation processor over the sources of a module
+void setupReachabilityMetadata(Project p) {
+    // graphics compiles twice, and only the second pass sees the generated shader sources
+    p.afterEvaluate {
+        def compile = p.tasks.findByName('compileFullJava') ?: p.compileJava
+        compile.options.annotationProcessorPath = rootProject.configurations.reachabilityProcessor
+        compile.options.compilerArgs.addAll([
+            "-Aproject=org.openjfx/${p.moduleName}",
+            "-Areachability.outputFormat=1.0.0"
+            ])
+    }
+}
+
+// Makes the annotations visible at compile time without adding them to module-info.
+// The module source path includes the annotated sources of other modules, so this
+// needs to be done for all modules and not just the annotated ones.
+void addReachabilityAnnotations(Project p) {
+    List<String> args = []
+    p.moduleChain.each { String projectName ->
+        String moduleName = project(projectName).moduleName
+        if (REACHABILITY_ANNOTATED_MODULES.contains(moduleName)) {
+            args += [ "--add-reads", "${moduleName}=${REACHABILITY_MODULE}" ]
+        }
+    }
+    if (args.isEmpty()) {
+        return
+    }
+    args = [ "--add-modules", REACHABILITY_MODULE ] + args
+
+    String jar = rootProject.configurations.reachabilityAnnotations.singleFile.path
+    if (p.hasProperty('modulePathArgs')) {
+        List<String> mpa = new ArrayList<>(p.modulePathArgs)
+        mpa.set(1, mpa.get(1) + File.pathSeparator + jar)
+        p.ext.modulePathArgs = mpa
+    } else {
+        p.ext.modulePathArgs = [ '--module-path', jar ]
+    }
+    p.compileJava.options.compilerArgs.addAll(args)
+
+    // The second graphics pass compiles from the class path and needs an explicit module path
+    [ 'compileShimsJava', 'compileFullJava' ].each { String name ->
+        def compile = p.tasks.findByName(name)
+        if (compile == null) {
+            return
+        }
+        compile.classpath += rootProject.configurations.reachabilityAnnotations
+        compile.options.compilerArgs.addAll(args)
+        if (name == 'compileFullJava') {
+            compile.options.compilerArgs.addAll([ '--module-path', jar ])
+        }
+    }
+}
+
 if (BUILD_TOOLS_DOWNLOAD_SCRIPT != "") {
     println "Include build tools download script:${BUILD_TOOLS_DOWNLOAD_SCRIPT}"
     apply from: BUILD_TOOLS_DOWNLOAD_SCRIPT
@@ -2085,6 +2155,21 @@ allprojects {
 
     if (JFX_DEPS_URL == "") {
         repositories {
+            // Resolve the reachability processor without pom metadata (see '@jar' above)
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        url "https://repo1.maven.org/maven2"
+                        metadataSources {
+                            artifact()
+                        }
+                    }
+                }
+                filter {
+                    includeGroup "us.hebi.graalvm"
+                    includeGroup "us.hebi.quickbuf"
+                }
+            }
             mavenCentral()
             ivy {
                 url "https://download.eclipse.org/eclipse/updates/${eclipseUpdatesiteVersion}/plugins/"
@@ -2278,6 +2363,7 @@ project(":base") {
     }
 
     commonModuleSetup(project, [ 'base' ])
+    setupReachabilityMetadata(project)
 
     project.ext.moduleSourcePath = defaultModuleSourcePath
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
@@ -2363,6 +2449,7 @@ project(":graphics") {
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
 
     commonModuleSetup(project, [ 'base', 'graphics' ])
+    setupReachabilityMetadata(project)
 
     List<String> decoraAddExports = [
             '--add-exports=javafx.graphics/com.sun.scenario.effect=ALL-UNNAMED',
@@ -2893,6 +2980,7 @@ project(":controls") {
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
 
     commonModuleSetup(project, [ 'base', 'graphics', 'controls' ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":graphics").sourceSets.test.output
@@ -2991,6 +3079,7 @@ project(":incubator.input") {
         'controls',
         'incubator.input'
     ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":base").sourceSets.test.output
@@ -3049,6 +3138,7 @@ project(":incubator.richtext") {
         'incubator.input',
         'incubator.richtext'
     ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":base").sourceSets.test.output
@@ -3234,7 +3324,7 @@ project(":fxml") {
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
 
     commonModuleSetup(project, [ 'base', 'graphics', 'controls', 'fxml' ])
-
+    setupReachabilityMetadata(project)
 
     dependencies {
         testImplementation project(":graphics").sourceSets.test.output
@@ -4587,6 +4677,8 @@ allprojects {
         // and redirect the resources into the module
         project.sourceSets.main.output.resourcesDir = project.moduleDir
         project.processResources.destinationDir = project.moduleDir
+
+        addReachabilityAnnotations(project)
     }
 
     if (project.hasProperty('moduleSourcePathShim') &&
@@ -4819,6 +4911,13 @@ task javadoc(type: Javadoc, dependsOn: [createMSPfile, createOverviewFile]) {
     options.setOptionFiles([
         new File(rootProject.buildDir,MODULESOURCEPATH)
         ]);
+
+    // The annotations are not in any module-info, so javadoc needs the same module graph
+    // patches as the compile tasks, see addReachabilityAnnotations()
+    options.modulePath = [ rootProject.configurations.reachabilityAnnotations.singleFile ]
+    options.addStringOption("-add-modules", REACHABILITY_MODULE)
+    options.addMultilineStringsOption("-add-reads").setValue(
+        REACHABILITY_ANNOTATED_MODULES.collect { "${it}=${REACHABILITY_MODULE}".toString() })
 
     doLast {
         projectsToDocument.each { p ->
