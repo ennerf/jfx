@@ -1,0 +1,177 @@
+#
+# Builds the statically linked JavaFX SDK (-PSTATIC_BUILD=true, no media, no webkit) for every
+# desktop platform and uploads the two bundles. The workflow is derived from submit.yml, so the
+# build steps are the same except that the boot JDK comes from setup-java.
+#
+# 1) one combined artifact holding every target for use in jfx-static-feature. A manual run also
+#    publishes it and the per-target zips as a GitHub release named <version>-<commit>, which is
+#    what jfx-static-libs downloads
+#
+# 2) one zip per target with the same name and layout as static libs for Gluon Substrate
+#    (minus monocle for linux-aarch64 builds as it is no longer supported)
+#
+
+name: Static JavaFX Libs
+
+# Workflows in new branches don't show up on the Github UI, so we also need a branch trigger
+on:
+  push:
+    branches:
+      - 'build-static*'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the combined SDK as a GitHub release
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux-x86_64
+            runner: ubuntu-24.04
+          - target: linux-aarch64
+            runner: ubuntu-24.04-arm
+          - target: darwin-x86_64
+            runner: macos-15-intel
+            xcode: /Applications/Xcode_16.0.app/Contents/Developer
+          - target: darwin-aarch64
+            runner: macos-14
+            xcode: /Applications/Xcode_15.4.app/Contents/Developer
+          - target: windows-x86_64
+            runner: windows-2022
+
+    steps:
+      - name: Checkout the source
+        uses: actions/checkout@v4
+        with:
+          path: jfx
+
+      - name: Setup boot JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          set -x
+          sudo apt-get update
+          sudo apt-get install -y ant libgl1-mesa-dev libx11-dev libxxf86vm-dev libxt-dev pkg-config libgtk2.0-dev libgtk-3-dev libxtst-dev
+          gcc -v
+
+      - name: Select Xcode (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          set -x
+          sudo xcode-select --switch "${{ matrix.xcode }}"
+          xcodebuild -version
+
+      - name: Build the static SDK
+        working-directory: jfx
+        shell: bash
+        run: |
+          set -x
+          java -version
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            GRADLEW=./gradlew.bat
+            # Skip "chmod" task for GHA builds. See JDK-8354337 for details.
+            EXTRA_ARGS=-PCHMOD_ARTIFACTS=false
+          else
+            GRADLEW="bash gradlew"
+            EXTRA_ARGS=
+          fi
+          $GRADLEW -version
+          $GRADLEW --info --no-daemon -PSTATIC_BUILD=true -PCOMPILE_MEDIA=false -PCOMPILE_WEBKIT=false $EXTRA_ARGS sdk
+
+      # Individual system libs in the Gluon Substrate format/layout
+      - name: Package the SDK
+        id: package
+        working-directory: jfx/build
+        shell: bash
+        run: |
+          set -x
+          ls -l sdk/lib
+          version=$(sed -n 's/^javafx\.version=//p' sdk/lib/javafx.properties | tr -d '\r')
+          zip_name="openjfx-${version}-${{ matrix.target }}-static.zip"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            7z a -tzip "$zip_name" sdk
+          else
+            zip -qr "$zip_name" sdk
+          fi
+          ls -l "$zip_name"
+          echo "zip_name=$zip_name" >> "$GITHUB_OUTPUT"
+
+      # Upload individual libs
+      - name: Upload the SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: jfx/build/${{ steps.package.outputs.zip_name }}
+          compression-level: 0
+          if-no-files-found: error
+
+  # Combines the static libs into a single artifact that can be easily depended on. The size
+  # overhead of per-platform to combined-platforms is negligible, but this is easier to deal with
+  combine:
+    name: combined
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download every target
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Assemble one tree
+        id: combine
+        shell: bash
+        run: |
+          set -x
+          for dir in artifacts/*/; do
+            target=$(basename "$dir")
+            mkdir -p "combined/$target"
+            unzip -q "$dir"/*.zip -d "combined/$target"
+            rm -rf "combined/$target/sdk/src.zip" "combined/$target/sdk/bin"
+          done
+          # Read the shared text files from linux to guarantee consistent line endings
+          version=$(sed -n 's/^javafx\.version=//p' combined/linux-x86_64/sdk/lib/javafx.properties | tr -d '\r')
+          du -sh combined
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      # The archives are uncompressed in the SDK and make up most of what is left, so this is worth
+      # the time it costs: about 47 MB of them come down to 10 MB
+      - name: Upload the combined SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: openjfx-${{ steps.combine.outputs.version }}-static
+          path: combined
+          if-no-files-found: error
+
+      # The combined zip has the hash in its name so a stale download is never reused. The per-target
+      # zips keep their Gluon names, so the release directory could work as a Substrate download URL
+      - name: Publish the release
+        if: inputs.publish || github.event_name == 'push'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -x
+          version="${{ steps.combine.outputs.version }}"
+          tag="$version-${GITHUB_SHA::10}"
+          zip_name="openjfx-$tag-static.zip"
+          (cd combined && zip -qr "../$zip_name" .)
+          gh release create "$tag" "$zip_name" artifacts/*/*.zip --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease \
+            --title "Static JavaFX $version ($GITHUB_REF_NAME)" \
+            --notes "Statically linked JavaFX SDK of every desktop platform, built from $GITHUB_SHA on $GITHUB_REF_NAME."
