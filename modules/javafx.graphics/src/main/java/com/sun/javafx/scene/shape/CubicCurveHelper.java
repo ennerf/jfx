@@ -31,9 +31,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of CubicCurve.
  */
+@Reachable(classes = CubicCurve.class, memberAccess = {})
 public class CubicCurveHelper extends ShapeHelper {
 
     private static final CubicCurveHelper theInstance;

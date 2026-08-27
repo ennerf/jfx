@@ -28,9 +28,12 @@ package com.sun.javafx.scene.input;
 import com.sun.javafx.util.Utils;
 import javafx.scene.input.Clipboard;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Clipboard.
  */
+@Reachable(classes = Clipboard.class, memberAccess = {})
 public class ClipboardHelper {
 
     private static ClipboardAccessor clipboardAccessor;

@@ -26,9 +26,12 @@ package com.sun.glass.ui.win;
 
 import com.sun.glass.ui.Timer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MS Windows platform implementation class for Timer.
  */
+@Reachable(jniAccessible = true)
 final class WinTimer extends Timer {
 
     static {

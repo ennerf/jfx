@@ -32,9 +32,12 @@ import com.sun.javafx.tk.HeaderAreaType;
 
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MS Windows platform implementation class for View.
  */
+@Reachable(jniAccessible = true)
 final class WinView extends View {
 
     private native static void _initIDs();

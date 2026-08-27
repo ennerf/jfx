@@ -30,9 +30,12 @@ import javafx.stage.StageStyle;
 import java.util.Locale;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * The client-side window decoration theme used for {@link StageStyle#EXTENDED} windows.
  */
+@Reachable(resources = { "WindowDecorationGnome.css", "WindowDecorationKDE.css" })
 enum WindowDecorationTheme {
 
     GNOME("WindowDecorationGnome.css"),

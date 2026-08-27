@@ -25,6 +25,9 @@
 
 package com.sun.pisces;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public final class Transform6 {
 
     public int m00, m01, m10, m11;

@@ -28,6 +28,8 @@ package com.sun.javafx.geom;
 import com.sun.javafx.geom.transform.BaseTransform;
 import java.util.Arrays;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * The {@code Path2D} class provides a simple, yet flexible
  * shape which represents an arbitrary geometric path.
@@ -61,6 +63,7 @@ import java.util.Arrays;
  *
  * @version 1.10, 05/05/07
  */
+@Reachable(jniAccessible = true)
  public class Path2D extends Shape implements PathConsumer2D {
 
      static final int curvecoords[] = {2, 2, 4, 6, 0};

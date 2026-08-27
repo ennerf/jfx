@@ -51,7 +51,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.function.Supplier;
 import java.lang.annotation.Native;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+
+@Reachable(jniAccessible = true)
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.freetype.FTFactory")
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, IllegalStateException.class, Iterable.class, Object.class,
+        OutOfMemoryError.class, Runnable.class, String.class, Throwable.class,
+        UnsupportedOperationException.class, ByteBuffer.class, java.util.ArrayList.class,
+        java.util.Collections.class, java.util.HashMap.class, java.util.HashSet.class,
+        java.util.Iterator.class, Map.class, java.util.Set.class })
 final class GtkApplication extends Application implements
                                     InvokeLaterDispatcher.InvokeLaterSubmitter {
     private static final int forcedGtkVersion;

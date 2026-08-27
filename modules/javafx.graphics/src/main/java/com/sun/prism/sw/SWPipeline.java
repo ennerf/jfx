@@ -36,6 +36,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true, classes = {
+        IllegalArgumentException.class, IllegalStateException.class, OutOfMemoryError.class })
 public final class SWPipeline extends GraphicsPipeline {
 
     static {

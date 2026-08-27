@@ -33,6 +33,15 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.coretext.CTFactory")
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, Integer.class, Long.class, Runnable.class,
+        RuntimeException.class, String.class, Thread.class,
+        java.util.Map.class, java.util.Vector.class })
 public final class IosApplication extends Application {
 
     private static native void _initIDs(); // init IDs for java callbacks from native

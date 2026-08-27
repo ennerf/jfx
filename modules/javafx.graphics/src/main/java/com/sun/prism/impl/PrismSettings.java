@@ -31,9 +31,12 @@ import java.util.StringTokenizer;
 import com.sun.javafx.PlatformUtil;
 import com.sun.javafx.util.Utils;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Contains the runtime arguments used by Prism.
  */
+@Reachable(jniAccessible = true)
 public final class PrismSettings {
 
     public static final boolean verbose;

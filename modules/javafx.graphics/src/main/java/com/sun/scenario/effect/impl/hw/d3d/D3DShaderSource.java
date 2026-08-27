@@ -28,7 +28,11 @@ package com.sun.scenario.effect.impl.hw.d3d;
 import java.io.InputStream;
 import com.sun.scenario.effect.Effect.AccelType;
 import com.sun.scenario.effect.impl.hw.ShaderSource;
+import com.sun.prism.d3d.D3DPipeline;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = D3DPipeline.class, resources = "hlsl/*.obj")
 public class D3DShaderSource implements ShaderSource {
 
     public D3DShaderSource() {

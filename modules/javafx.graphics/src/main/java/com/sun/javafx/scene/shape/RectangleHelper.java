@@ -33,9 +33,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Rectangle.
  */
+@Reachable(classes = Rectangle.class, memberAccess = {})
 public class RectangleHelper extends ShapeHelper {
 
     private static final RectangleHelper theInstance;

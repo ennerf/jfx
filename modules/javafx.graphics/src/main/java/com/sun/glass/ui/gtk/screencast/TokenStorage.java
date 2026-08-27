@@ -45,6 +45,9 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
@@ -58,6 +61,7 @@ import static com.sun.glass.ui.gtk.screencast.ScreencastHelper.SCREENCAST_DEBUG;
  * The restore token allows the ScreenCast session to be restored
  * with previously granted screen access permissions.
  */
+@Reachable(jniAccessible = true, memberAccess = MemberAccess.ALL_DECLARED_METHODS) // screencast_pipewire.c
 final class TokenStorage {
 
     private TokenStorage() {}

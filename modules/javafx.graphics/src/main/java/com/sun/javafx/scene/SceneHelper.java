@@ -36,9 +36,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal scene methods.
  */
+@Reachable(classes = Scene.class, memberAccess = {})
 public final class SceneHelper {
     private static SceneAccessor sceneAccessor;
 

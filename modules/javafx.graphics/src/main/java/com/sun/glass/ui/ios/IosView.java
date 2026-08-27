@@ -29,9 +29,13 @@ import com.sun.glass.ui.Pixels;
 import com.sun.glass.ui.View;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * iOS View platform implementation.
  */
+@Reachable(jniAccessible = true)
+@Reachable(jniAccessible = true, classes = IosGestureSupport.class) // ios/GlassViewDelegate.m
 final class IosView extends View {
 
     private long nativePtr;

@@ -32,6 +32,9 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable
 final class D3DShader extends D3DResource implements Shader {
 
     private static IntBuffer itmp;

@@ -35,6 +35,9 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 
 class Trampoline {
     static {
@@ -69,6 +72,7 @@ class Trampoline {
 /*
  * Create a trampoline class.
  */
+@Reachable(classes = Trampoline.class, memberAccess = MemberAccess.ALL_DECLARED_METHODS)
 public final class MethodUtil extends SecureClassLoader {
 
     static {

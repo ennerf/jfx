@@ -32,6 +32,9 @@ import com.sun.glass.ui.Pixels;
 import java.io.IOException;
 import java.io.InputStream;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(resources = "*.raw")
 final class MonocleCursor extends Cursor {
     private byte[] image;
     private int hotspotX;

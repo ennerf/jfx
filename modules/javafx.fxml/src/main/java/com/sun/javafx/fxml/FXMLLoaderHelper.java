@@ -28,9 +28,12 @@ package com.sun.javafx.fxml;
 import com.sun.javafx.util.Utils;
 import javafx.fxml.FXMLLoader;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal FXMLLoader methods.
  */
+@Reachable(classes = FXMLLoader.class, memberAccess = {})
 public class FXMLLoaderHelper {
     private static FXMLLoaderAccessor fxmlLoaderAccessor;
 
