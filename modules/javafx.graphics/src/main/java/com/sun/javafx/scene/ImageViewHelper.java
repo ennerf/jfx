@@ -32,9 +32,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of ImageView.
  */
+@Reachable(classes = ImageView.class, memberAccess = {})
 public class ImageViewHelper extends NodeHelper {
 
     private static final ImageViewHelper theInstance;

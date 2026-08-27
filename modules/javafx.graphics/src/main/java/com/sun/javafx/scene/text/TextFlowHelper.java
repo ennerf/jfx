@@ -28,9 +28,12 @@ package com.sun.javafx.scene.text;
 import javafx.scene.text.TextFlow;
 import com.sun.javafx.util.Utils;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of TextFlow.
  */
+@Reachable(classes = TextFlow.class, memberAccess = {})
 public class TextFlowHelper {
     public interface Accessor {
         public TextLayout getTextLayout(TextFlow f);

@@ -32,8 +32,12 @@ package com.sun.scenario.effect.impl.sw.sse;
 
 import com.sun.scenario.effect.FilterContext;
 import com.sun.scenario.effect.impl.Renderer;
+import com.sun.scenario.effect.impl.prism.sw.PSWRenderer;
+
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
 
 public class SSELinearConvolveShadowPeer extends SSELinearConvolvePeer {
+    @ReachableMember(condition = PSWRenderer.class)
     public SSELinearConvolveShadowPeer(FilterContext fctx, Renderer r, String uniqueName) {
         super(fctx, r, uniqueName);
     }

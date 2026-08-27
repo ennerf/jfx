@@ -30,11 +30,14 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.ByteOrder;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * The object wraps the given raw pixels data.
  *
  * Pixels class is NOT thread safe.
  */
+@Reachable(jniAccessible = true)
 public abstract class Pixels {
     /**
      * The Format specifies the native byte order of the

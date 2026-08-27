@@ -40,6 +40,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.directwrite.DWFactory")
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, IllegalAccessException.class, Object.class,
+        Runnable.class, String.class, Throwable.class, java.io.IOException.class,
+        java.util.Collections.class, java.util.HashMap.class, Map.class })
 final class WinApplication extends Application implements InvokeLaterDispatcher.InvokeLaterSubmitter {
 
     static float overrideUIScale;

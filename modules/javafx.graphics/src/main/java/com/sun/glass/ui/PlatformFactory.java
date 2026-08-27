@@ -31,6 +31,17 @@ import com.sun.glass.ui.delegate.MenuBarDelegate;
 import com.sun.glass.ui.delegate.MenuDelegate;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classNames = {
+        "com.sun.glass.ui.gtk.GtkPlatformFactory",
+        "com.sun.glass.ui.headless.HeadlessPlatformFactory",
+        "com.sun.glass.ui.ios.IosPlatformFactory",
+        "com.sun.glass.ui.mac.MacPlatformFactory",
+        "com.sun.glass.ui.monocle.MonoclePlatformFactory",
+        "com.sun.glass.ui.win.WinPlatformFactory" },
+        memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS)
 public abstract class PlatformFactory {
     private static PlatformFactory instance;
     public static synchronized PlatformFactory getPlatformFactory() {

@@ -27,6 +27,9 @@ package com.sun.pisces;
 
 import com.sun.prism.impl.Disposer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class AbstractSurface implements Surface {
 
     private long nativePtr = 0L;

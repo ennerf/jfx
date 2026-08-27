@@ -29,6 +29,9 @@ import java.lang.reflect.Method;
 import com.sun.javafx.PlatformUtil;
 import com.sun.scenario.effect.FilterContext;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * A factory that produces a {@code Renderer} instance appropriate for
  * the desktop and tv stacks (either Swing or Prism based).  This class
@@ -36,6 +39,8 @@ import com.sun.scenario.effect.FilterContext;
  * which is not available on CLDC.  The CLDC-based mobile stack may
  * substitute their own version of this class that does not rely on reflection.
  */
+@Reachable(memberAccess = { MemberAccess.ALL_DECLARED_CONSTRUCTORS, MemberAccess.ALL_DECLARED_METHODS },
+        classNames = "com.sun.scenario.effect.impl.prism.PrRenderer")
 class RendererFactory {
 
     private static String rootPkg = Renderer.rootPkg;

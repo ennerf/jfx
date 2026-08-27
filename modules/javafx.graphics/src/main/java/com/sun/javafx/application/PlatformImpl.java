@@ -59,6 +59,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = PreviewFeature.class, memberAccess = {})
 public class PlatformImpl {
 
     static {

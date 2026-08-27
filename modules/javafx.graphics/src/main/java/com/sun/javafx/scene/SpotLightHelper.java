@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.SpotLight;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of SpotLight.
  */
+@Reachable(classes = SpotLight.class, memberAccess = {})
 public class SpotLightHelper extends PointLightHelper {
 
     private static final SpotLightHelper theInstance;

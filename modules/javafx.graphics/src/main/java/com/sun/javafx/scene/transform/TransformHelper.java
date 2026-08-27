@@ -31,9 +31,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.transform.Transform;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Transform.
  */
+@Reachable(classes = Transform.class, memberAccess = {})
 public class TransformHelper {
 
     private static TransformAccessor transformAccessor;

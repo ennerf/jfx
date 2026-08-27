@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.freetype;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class PangoGlyphString {
     /* Fields from PangoItem */
     int offset;

@@ -28,9 +28,12 @@ package com.sun.javafx.animation;
 import com.sun.javafx.util.Utils;
 import javafx.animation.KeyValue;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of KeyValue.
  */
+@Reachable(classes = KeyValue.class, memberAccess = {})
 public class KeyValueHelper {
 
     private static KeyValueAccessor keyValueAccessor;
