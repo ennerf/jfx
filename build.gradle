@@ -1311,7 +1311,7 @@ void commonModuleSetup(Project p, List<String> moduleChain) {
 // files end up in the modules.
 ext.REACHABILITY_MODULE = "us.hebi.graalvm.reachability.annotations"
 ext.REACHABILITY_ANNOTATED_MODULES = [ "javafx.base", "javafx.graphics", "javafx.controls", "javafx.fxml",
-                                       "javafx.media", "javafx.web",
+                                       "javafx.media", "javafx.web", "javafx.swing",
                                        "jfx.incubator.input", "jfx.incubator.richtext" ]
 
 // Plain jars ('@jar') to keep the transitive pom closure out of the dependency verification
@@ -3186,6 +3186,7 @@ project(":swing") {
     project.ext.moduleSourcePathShim = defaultModuleSourcePathShim
 
     commonModuleSetup(project, [ 'base', 'graphics', 'swing' ])
+    setupReachabilityMetadata(project)
 
     dependencies {
         implementation project(":base")
