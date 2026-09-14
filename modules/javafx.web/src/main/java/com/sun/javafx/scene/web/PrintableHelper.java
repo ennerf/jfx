@@ -31,7 +31,9 @@ import com.sun.javafx.scene.NodeHelper;
 import com.sun.javafx.sg.prism.NGNode;
 import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(classes = Printable.class, memberAccess = {})
 public class PrintableHelper extends NodeHelper {
 
     private static final PrintableHelper theInstance;

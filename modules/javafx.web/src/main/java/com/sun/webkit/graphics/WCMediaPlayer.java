@@ -27,7 +27,9 @@ package com.sun.webkit.graphics;
 
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.webkit.Invoker;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class WCMediaPlayer extends Ref {
 
     protected final static PlatformLogger log = PlatformLogger.getLogger("webkit.mediaplayer");

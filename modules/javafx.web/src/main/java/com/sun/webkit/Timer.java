@@ -25,6 +25,9 @@
 
 package com.sun.webkit;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public class Timer {
     private static Timer instance;
     private static Mode mode;

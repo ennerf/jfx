@@ -28,10 +28,12 @@ package com.sun.javafx.webkit.theme;
 import com.sun.javafx.scene.control.ControlHelper;
 import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Used to access internal methods of ScrollBarWidget.
  */
+@Reachable(classes = ScrollBarWidget.class, memberAccess = {})
 public class ScrollBarWidgetHelper extends ControlHelper {
     private static final ScrollBarWidgetHelper theInstance;
     private static ScrollBarWidgetAccessor scrollBarWidgetAccessor;

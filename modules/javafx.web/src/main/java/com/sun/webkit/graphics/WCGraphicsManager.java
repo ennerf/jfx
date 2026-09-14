@@ -35,7 +35,9 @@ import java.util.HashMap;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true, classes = WCGraphicsManager.class, bundles = "Images")
 public abstract class WCGraphicsManager {
 
     private static final PlatformLogger logger =

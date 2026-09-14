@@ -28,7 +28,9 @@ package com.sun.webkit.security;
 import com.sun.javafx.webkit.WCMessageDigestImpl;
 import com.sun.webkit.perf.WCMessageDigestPerfLogger;
 import java.nio.ByteBuffer;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class WCMessageDigest {
     /**
      * Creates the instance of WCMessageDigest for the given algorithm.

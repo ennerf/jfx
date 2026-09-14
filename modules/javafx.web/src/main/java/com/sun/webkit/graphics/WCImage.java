@@ -27,7 +27,9 @@ package com.sun.webkit.graphics;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class WCImage extends Ref {
     private WCRenderQueue rq;
     private String fileExtension;

@@ -26,7 +26,9 @@
 package com.sun.webkit.graphics;
 
 import java.lang.annotation.Native;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class ScrollBarTheme extends Ref {
 
     // See constants values WebCore/platform/ScrollTypes.h

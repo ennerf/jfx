@@ -33,7 +33,9 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class WCRenderQueue extends Ref {
     private final static AtomicInteger idCountObj = new AtomicInteger(0);
     private final static PlatformLogger log =

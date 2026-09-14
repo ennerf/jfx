@@ -38,7 +38,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.javafx.logging.PlatformLogger.Level;
 import com.sun.webkit.WebPage;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class NetworkContext {
 
     private static final PlatformLogger logger =

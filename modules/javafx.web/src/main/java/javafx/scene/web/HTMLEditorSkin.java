@@ -81,6 +81,8 @@ import javafx.collections.ListChangeListener;
 
 import static javafx.geometry.NodeOrientation.*;
 import javafx.print.PrinterJob;
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 import static javafx.scene.web.HTMLEditorSkin.Command.*;
 
@@ -90,6 +92,8 @@ import static javafx.scene.web.HTMLEditorSkin.Command.*;
  * @see HTMLEditor
  * @since 9
  */
+@Reachable(resources = "*.png", bundles = "HTMLEditorSkin")
+@Reachable(condition = HTMLEditor.class, memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS) // HTMLEditor sets -fx-skin
 public class HTMLEditorSkin extends SkinBase<HTMLEditor> {
 
     /* *************************************************************************

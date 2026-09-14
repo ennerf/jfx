@@ -28,7 +28,9 @@ package com.sun.webkit;
 import com.sun.javafx.logging.PlatformLogger;
 
 import com.sun.webkit.graphics.WCImageFrame;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 final class WCPasteboard {
 
     private final static PlatformLogger log =

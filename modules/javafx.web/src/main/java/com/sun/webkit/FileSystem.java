@@ -36,7 +36,9 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 final class FileSystem {
 
     // File type should match native FileMetadata Type
