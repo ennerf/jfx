@@ -63,11 +63,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Base implementation of a
  * <code>MediaPlayer</code>.
  */
+@Reachable(jniAccessible = true)
 public abstract class NativeMediaPlayer implements MediaPlayer, MarkerStateListener {
     //***** Event IDs for PlayerStateEvent.  IDs sent from native JNI layer.
 

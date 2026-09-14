@@ -45,12 +45,14 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CountDownLatch;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * A
  * <code>Locator</code> which refers to a
  * <code>URI</code>.
  */
+@Reachable(jniAccessible = true)
 public class Locator {
 
     /**
