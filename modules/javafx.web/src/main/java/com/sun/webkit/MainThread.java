@@ -25,9 +25,12 @@
 
 package com.sun.webkit;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * The class reflects the native webkit module.
  */
+@Reachable(condition = WebPage.class, jniAccessible = true)
 final class MainThread {
 
     private static void fwkScheduleDispatchFunctions() {

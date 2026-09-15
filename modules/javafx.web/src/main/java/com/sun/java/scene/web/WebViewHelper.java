@@ -34,10 +34,12 @@ import com.sun.javafx.sg.prism.NGNode;
 import com.sun.javafx.util.Utils;
 import javafx.scene.web.WebView;
 import javafx.scene.Node;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Used to access internal methods of WebView.
  */
+@Reachable(classes = WebView.class, memberAccess = {})
 public class WebViewHelper extends ParentHelper {
 
     private static final WebViewHelper theInstance;

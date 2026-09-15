@@ -36,7 +36,9 @@ import com.sun.webkit.plugin.PluginListener;
 import com.sun.webkit.plugin.PluginManager;
 import com.sun.webkit.graphics.WCGraphicsContext;
 import com.sun.webkit.graphics.WCRectangle;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 final class WCPluginWidget extends WCWidget implements PluginListener {
 
     private final static PlatformLogger log =

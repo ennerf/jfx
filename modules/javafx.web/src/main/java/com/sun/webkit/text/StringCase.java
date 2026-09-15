@@ -26,7 +26,9 @@
 package com.sun.webkit.text;
 
 import java.util.Locale;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class StringCase {
 
     // Note that we should perform case-conversion with neutral locale to

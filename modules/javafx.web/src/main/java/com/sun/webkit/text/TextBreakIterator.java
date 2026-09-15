@@ -31,7 +31,9 @@ import java.text.CharacterIterator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class TextBreakIterator {
 
     // Break iterator types

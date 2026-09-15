@@ -43,7 +43,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(resources = "resources/*.png")
 final class WCImageDecoderImpl extends WCImageDecoder {
 
     private final static PlatformLogger log;
