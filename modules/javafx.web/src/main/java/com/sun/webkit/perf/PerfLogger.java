@@ -32,7 +32,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public final class PerfLogger {
     private static Thread shutdownHook;
     private static Map<PlatformLogger, PerfLogger> loggers;

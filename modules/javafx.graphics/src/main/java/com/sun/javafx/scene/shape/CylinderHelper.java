@@ -34,9 +34,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.shape.Cylinder;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Cylinder.
  */
+@Reachable(classes = Cylinder.class, memberAccess = {})
 public class CylinderHelper extends Shape3DHelper {
 
     private static final CylinderHelper theInstance;

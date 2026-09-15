@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Properties;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 public class FontConfigManager {
 
     static boolean debugFonts = false;
@@ -52,6 +54,7 @@ public class FontConfigManager {
 
     /* These next three classes are just data structures.
      */
+    @Reachable(jniAccessible = true)
     public static class FontConfigFont {
         public String familyName;        // eg Bitstream Vera Sans
         public String styleStr;          // eg Bold
@@ -59,6 +62,7 @@ public class FontConfigManager {
         public String fontFile;          // eg /usr/X11/lib/fonts/foo.ttf
     }
 
+    @Reachable(jniAccessible = true)
     public static class FcCompFont {
         public String fcName;            // eg sans
         public String fcFamily;          // eg sans

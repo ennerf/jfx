@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of QuadCurveTo.
  */
+@Reachable(classes = QuadCurveTo.class, memberAccess = {})
 public class QuadCurveToHelper extends PathElementHelper {
 
     private static final QuadCurveToHelper theInstance;

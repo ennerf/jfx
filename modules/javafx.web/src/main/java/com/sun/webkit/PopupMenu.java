@@ -26,7 +26,9 @@
 package com.sun.webkit;
 
 import com.sun.webkit.graphics.WCFont;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public abstract class PopupMenu {
     private long pdata;
 

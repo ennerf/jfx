@@ -32,9 +32,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HeaderButtonType;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Windows-specific version of {@link HeaderButtonOverlay} that tweaks the scaling of header button glyphs.
  */
+@Reachable(jniAccessible = true, classes = WinHeaderButtonOverlay.class, resources = "WindowDecoration.css", bundles = "themes")
 public class WinHeaderButtonOverlay extends HeaderButtonOverlay {
 
     private static final String HEADER_BUTTONS_STYLESHEET = "WindowDecoration.css";

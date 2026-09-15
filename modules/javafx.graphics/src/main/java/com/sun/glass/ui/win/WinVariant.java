@@ -25,6 +25,9 @@
 
 package com.sun.glass.ui.win;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinVariant {
     static final int VT_EMPTY = 0;
     static final int VT_NULL  = 1;

@@ -29,6 +29,8 @@ import com.sun.glass.utils.NativeLibLoader;
 
 import java.nio.ByteBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * LinuxSystem provides access to Linux system calls. Except where noted, each
  * method in LinuxSystem corresponds to exactly one system call taking
@@ -38,6 +40,7 @@ import java.nio.ByteBuffer;
  * LinuxSystem is a singleton. Its instance is obtained by calling
  * LinuxSystem.getLinuxSystem().
  */
+@Reachable(jniAccessible = true, classes = java.io.IOException.class)
 class LinuxSystem {
     private static LinuxSystem instance = new LinuxSystem();
 

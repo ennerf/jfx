@@ -28,7 +28,9 @@ package com.sun.webkit;
 import com.sun.javafx.logging.PlatformLogger;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true, classes = LocalizedStrings.class, bundles = "LocalizedStrings")
 final class LocalizedStrings {
     private final static PlatformLogger log =
             PlatformLogger.getLogger(LocalizedStrings.class.getName());

@@ -30,9 +30,12 @@ import java.util.function.Consumer;
 import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.richtext.model.RichParagraph;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Provides access to internal methods in RichParagraph.
  */
+@Reachable(classes = RichParagraph.class, memberAccess = {})
 public class RichParagraphHelper {
     public interface Accessor {
         public List<Consumer<TextCell>> getHighlights(RichParagraph p);

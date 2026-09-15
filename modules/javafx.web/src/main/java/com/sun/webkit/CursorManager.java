@@ -31,7 +31,9 @@ import java.util.Map;
 
 import com.sun.webkit.graphics.WCImage;
 import com.sun.webkit.graphics.WCImageFrame;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public abstract class CursorManager<T> {
 
     @Native public static final int POINTER                      =  0;

@@ -40,9 +40,13 @@ import com.sun.javafx.geom.Rectangle;
 import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.scenario.effect.impl.state.LinearConvolveRenderState;
 import com.sun.scenario.effect.impl.state.LinearConvolveRenderState.PassType;
+import com.sun.scenario.effect.impl.prism.sw.PSWRenderer;
+
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
 
 public class SSELinearConvolvePeer extends SSEEffectPeer<LinearConvolveRenderState> {
 
+    @ReachableMember(condition = PSWRenderer.class)
     public SSELinearConvolvePeer(FilterContext fctx, Renderer r, String uniqueName) {
         super(fctx, r, uniqueName);
     }

@@ -38,6 +38,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Represents an OpenGL shader program object, which can be constructed from
  * the source code for a vertex shader, a fragment shader, or both.
@@ -64,6 +66,7 @@ import java.util.Map;
  * };
  * </pre>
  */
+@Reachable
 public class ES2Shader extends BaseGraphicsResource implements Shader {
 
     private static class Uniform {

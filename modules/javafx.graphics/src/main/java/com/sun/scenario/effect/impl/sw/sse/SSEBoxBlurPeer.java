@@ -38,9 +38,13 @@ import com.sun.scenario.effect.impl.Renderer;
 import com.sun.javafx.geom.Rectangle;
 import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.scenario.effect.impl.state.BoxRenderState;
+import com.sun.scenario.effect.impl.prism.sw.PSWRenderer;
+
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
 
 public class SSEBoxBlurPeer extends SSEEffectPeer<BoxRenderState> {
 
+    @ReachableMember(condition = PSWRenderer.class)
     public SSEBoxBlurPeer(FilterContext fctx, Renderer r, String uniqueName) {
         super(fctx, r, uniqueName);
     }

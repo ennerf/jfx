@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of ClosePath.
  */
+@Reachable(classes = ClosePath.class, memberAccess = {})
 public class ClosePathHelper extends PathElementHelper {
 
     private static final ClosePathHelper theInstance;

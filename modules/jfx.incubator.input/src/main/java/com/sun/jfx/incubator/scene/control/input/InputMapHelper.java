@@ -29,9 +29,12 @@ import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.input.FunctionTag;
 import jfx.incubator.scene.control.input.InputMap;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Hides execute() methods in InputMap from the public.
  */
+@Reachable(classes = InputMap.class, memberAccess = {})
 public class InputMapHelper {
     public interface Accessor {
         public void execute(Object source, InputMap inputMap, FunctionTag tag);

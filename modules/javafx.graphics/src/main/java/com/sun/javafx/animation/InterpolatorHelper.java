@@ -28,6 +28,9 @@ package com.sun.javafx.animation;
 import com.sun.javafx.util.Utils;
 import javafx.animation.Interpolator;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = Interpolator.class, memberAccess = {})
 public final class InterpolatorHelper {
 
     static {

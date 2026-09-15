@@ -42,6 +42,9 @@ import com.sun.glass.utils.NativeLibLoader;
 import com.sun.javafx.PlatformUtil;
 import com.sun.javafx.text.GlyphLayout;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true, classes = { String.class, ArrayList.class, HashMap.class })
 public abstract class PrismFontFactory implements FontFactory {
 
     public static final boolean debugFonts;

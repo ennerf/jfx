@@ -32,9 +32,13 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Utility routines for dealing with direct buffers.
  */
+@Reachable(classNames = { "java.nio.ByteOrder", "java.nio.ByteBuffer" }, memberAccess = MemberAccess.ALL_PUBLIC_METHODS)
 public class BufferUtil {
 
     public static final int SIZEOF_BYTE = 1;

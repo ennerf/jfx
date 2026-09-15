@@ -56,7 +56,10 @@ import java.util.Base64;
 import java.util.Optional;
 import com.sun.javafx.stage.StageHelper;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+
+@Reachable(classes = PreviewFeature.class, memberAccess = {})
 public class LauncherImpl {
 
     static {

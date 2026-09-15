@@ -31,7 +31,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class TextCodec {
     private final Charset charset;
 

@@ -31,9 +31,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Arc.
  */
+@Reachable(classes = Arc.class, memberAccess = {})
 public class ArcHelper extends ShapeHelper {
 
     private static final ArcHelper theInstance;

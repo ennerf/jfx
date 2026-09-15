@@ -53,7 +53,9 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLSocket;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class SocketStreamHandle {
     private static final Pattern FIRST_LINE_PATTERN = Pattern.compile(
             "^HTTP/1.[01]\\s+(\\d{3})(?:\\s.*)?$");

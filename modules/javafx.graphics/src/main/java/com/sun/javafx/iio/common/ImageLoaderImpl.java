@@ -32,6 +32,9 @@ import com.sun.javafx.iio.ImageMetadata;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class ImageLoaderImpl implements ImageLoader {
 
     protected ImageFormatDescription formatDescription;

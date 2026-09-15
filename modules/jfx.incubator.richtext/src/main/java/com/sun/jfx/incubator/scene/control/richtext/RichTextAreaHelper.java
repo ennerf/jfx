@@ -29,9 +29,12 @@ import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.richtext.RichTextArea;
 import jfx.incubator.scene.control.richtext.TextPos;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Manages RichTextArea Accessor.
  */
+@Reachable(classes = RichTextArea.class, memberAccess = {})
 public class RichTextAreaHelper {
 
     public interface Accessor {

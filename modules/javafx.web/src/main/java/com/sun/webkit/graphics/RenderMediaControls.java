@@ -30,7 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sun.prism.paint.Color;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class RenderMediaControls {
     /**
      * Media control part constants (types for the paintControl method)

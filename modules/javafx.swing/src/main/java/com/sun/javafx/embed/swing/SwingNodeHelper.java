@@ -36,12 +36,14 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 import javafx.scene.Node;
 import javax.swing.SwingUtilities;
 
 /**
  * Used to access internal methods of SwingNode.
  */
+@Reachable(classes = SwingNode.class, memberAccess = {})
 public class SwingNodeHelper extends NodeHelper {
 
     private static final SwingNodeHelper theInstance;

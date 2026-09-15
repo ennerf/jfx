@@ -31,9 +31,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Group.
  */
+@Reachable(classes = Group.class, memberAccess = {})
 public class GroupHelper extends ParentHelper {
 
     private static final GroupHelper theInstance;

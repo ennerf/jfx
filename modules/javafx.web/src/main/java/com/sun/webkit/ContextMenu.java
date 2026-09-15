@@ -25,6 +25,9 @@
 
 package com.sun.webkit;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public abstract class ContextMenu {
 
     protected abstract void show(ShowContext showContext, int x, int y);
