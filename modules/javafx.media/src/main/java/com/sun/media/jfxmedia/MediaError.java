@@ -31,6 +31,9 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(bundles = "/MediaErrors")
 public enum MediaError {
 
     ERROR_BASE_MEDIA(0x00000100),

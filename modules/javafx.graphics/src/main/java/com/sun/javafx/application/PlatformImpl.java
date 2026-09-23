@@ -61,7 +61,11 @@ import javafx.scene.Scene;
 
 import us.hebi.graalvm.reachability.annotations.Reachable;
 
-@Reachable(classes = PreviewFeature.class, memberAccess = {})
+@Reachable(classes = PreviewFeature.class, classNames = {
+        "javafx.stage.Stage", "javafx.scene.control.Control", "javafx.scene.media.MediaView",
+        "javafx.scene.web.WebView", "javafx.embed.swt.FXCanvas", "javax.swing.JComponent",
+        "javafx.embed.swing.JFXPanel", "javafx.fxml.FXMLLoader", "javax.xml.stream.XMLInputFactory" },
+        memberAccess = {})
 public class PlatformImpl {
 
     static {
