@@ -93,6 +93,8 @@ import com.sun.javafx.reflect.ConstructorUtil;
 import com.sun.javafx.reflect.MethodUtil;
 import com.sun.javafx.reflect.ReflectUtil;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Loads an object hierarchy from an XML document.
  * For more information, see the
@@ -101,6 +103,7 @@ import com.sun.javafx.reflect.ReflectUtil;
  *
  * @since JavaFX 2.0
  */
+@Reachable(resources = "/META-INF/services/javax.xml.stream.XMLInputFactory")
 public class FXMLLoader {
 
     // Abstract base class for elements

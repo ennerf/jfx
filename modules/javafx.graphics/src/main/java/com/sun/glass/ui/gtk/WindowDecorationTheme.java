@@ -35,7 +35,7 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
 /**
  * The client-side window decoration theme used for {@link StageStyle#EXTENDED} windows.
  */
-@Reachable(resources = { "WindowDecorationGnome.css", "WindowDecorationKDE.css" })
+@Reachable(resources = { "WindowDecorationGnome.css", "WindowDecorationGnome.bss", "WindowDecorationKDE.css", "WindowDecorationKDE.bss" })
 enum WindowDecorationTheme {
 
     GNOME("WindowDecorationGnome.css"),

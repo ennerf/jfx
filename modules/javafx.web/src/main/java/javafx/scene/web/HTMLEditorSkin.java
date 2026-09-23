@@ -92,7 +92,25 @@ import static javafx.scene.web.HTMLEditorSkin.Command.*;
  * @see HTMLEditor
  * @since 9
  */
-@Reachable(resources = "*.png", bundles = "HTMLEditorSkin")
+@Reachable(resources = {
+        "*.png",
+        "Cut_16x16_JFX@2x.png", "Cut_16x16_JFX@3x.png", "Cut_16x16_JFX@4x.png",
+        "Copy_16x16_JFX@2x.png", "Copy_16x16_JFX@3x.png", "Copy_16x16_JFX@4x.png",
+        "Paste_16x16_JFX@2x.png", "Paste_16x16_JFX@3x.png", "Paste_16x16_JFX@4x.png",
+        "AlignLeft_16x16_JFX@2x.png", "AlignLeft_16x16_JFX@3x.png", "AlignLeft_16x16_JFX@4x.png",
+        "AlignCenter_16x16_JFX@2x.png", "AlignCenter_16x16_JFX@3x.png", "AlignCenter_16x16_JFX@4x.png",
+        "AlignRight_16x16_JFX@2x.png", "AlignRight_16x16_JFX@3x.png", "AlignRight_16x16_JFX@4x.png",
+        "AlignJustified_16x16_JFX@2x.png", "AlignJustified_16x16_JFX@3x.png", "AlignJustified_16x16_JFX@4x.png",
+        "DecreaseIndent_16x16_JFX@2x.png", "DecreaseIndent_16x16_JFX@3x.png", "DecreaseIndent_16x16_JFX@4x.png",
+        "IncreaseIndent_16x16_JFX@2x.png", "IncreaseIndent_16x16_JFX@3x.png", "IncreaseIndent_16x16_JFX@4x.png",
+        "UnorderedListBullets_16x16_JFX@2x.png", "UnorderedListBullets_16x16_JFX@3x.png", "UnorderedListBullets_16x16_JFX@4x.png",
+        "OrderedListNumbers_16x16_JFX@2x.png", "OrderedListNumbers_16x16_JFX@3x.png", "OrderedListNumbers_16x16_JFX@4x.png",
+        "Bold_16x16_JFX@2x.png", "Bold_16x16_JFX@3x.png", "Bold_16x16_JFX@4x.png",
+        "Italic_16x16_JFX@2x.png", "Italic_16x16_JFX@3x.png", "Italic_16x16_JFX@4x.png",
+        "Underline_16x16_JFX@2x.png", "Underline_16x16_JFX@3x.png", "Underline_16x16_JFX@4x.png",
+        "Strikethrough_16x16_JFX@2x.png", "Strikethrough_16x16_JFX@3x.png", "Strikethrough_16x16_JFX@4x.png",
+        "DrawHorizontalLine_16x16_JFX@2x.png", "DrawHorizontalLine_16x16_JFX@3x.png", "DrawHorizontalLine_16x16_JFX@4x.png" },
+        bundles = "HTMLEditorSkin")
 @Reachable(condition = HTMLEditor.class, memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS) // HTMLEditor sets -fx-skin
 public class HTMLEditorSkin extends SkinBase<HTMLEditor> {
 

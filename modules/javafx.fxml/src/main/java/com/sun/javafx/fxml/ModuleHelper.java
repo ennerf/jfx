@@ -29,6 +29,10 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classNames = "java.lang.Module", memberAccess = MemberAccess.ALL_PUBLIC_METHODS)
 public class ModuleHelper {
     private static final Method getModuleMethod;
     private static final Method getResourceAsStreamMethod;

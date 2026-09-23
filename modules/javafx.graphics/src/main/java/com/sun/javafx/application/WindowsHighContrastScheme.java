@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Enumeration of possible high contrast scheme values.
  * <p>
@@ -40,6 +42,7 @@ import java.util.ResourceBundle;
  * <p>
  * The high contrast feature may not be available on all platforms.
  */
+@Reachable(bundles = "/com/sun/glass/ui/win/themes")
 enum WindowsHighContrastScheme {
 
     NONE(null),
