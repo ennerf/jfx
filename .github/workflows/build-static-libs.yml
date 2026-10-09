@@ -1,7 +1,9 @@
 #
 # Builds the statically linked JavaFX SDK (-PSTATIC_BUILD=true, no media, no webkit) for every
-# desktop platform and uploads the two bundles. The workflow is derived from submit.yml, so the
-# build steps are the same except that the boot JDK comes from setup-java.
+# platform, and uploads the two bundles. The workflow is derived from submit.yml, so the desktop
+# build steps are the same except that the boot JDK comes from setup-java. The mobile targets
+# cross-compile with COMPILE_TARGETS: Android on Linux with NDK r25c (android.gradle's API 21
+#  and toolchain layout) and a static FreeType from the same NDK, iOS with the runner's default Xcode.
 #
 # 1) one combined artifact holding every target for use in jfx-static-feature. A manual run also
 #    publishes it and the per-target zips as a GitHub release named <version>-<commit>, which is
@@ -48,6 +50,10 @@ jobs:
             xcode: /Applications/Xcode_15.4.app/Contents/Developer
           - target: windows-x86_64
             runner: windows-2022
+          - target: android-aarch64
+            runner: ubuntu-22.04
+          - target: ios-arm64
+            runner: macos-14
 
     steps:
       - name: Checkout the source
@@ -70,11 +76,31 @@ jobs:
           gcc -v
 
       - name: Select Xcode (macOS)
-        if: runner.os == 'macOS'
+        if: runner.os == 'macOS' && matrix.xcode
         run: |
           set -x
           sudo xcode-select --switch "${{ matrix.xcode }}"
           xcodebuild -version
+
+      # android.gradle expects the r25 toolchain layout and links against API 21. FreeType is not
+      # part of the NDK, so it is built statically with the same compiler and shipped in the SDK
+      - name: Install the NDK and build FreeType (Android)
+        if: matrix.target == 'android-aarch64'
+        shell: bash
+        run: |
+          set -x
+          curl -sSL -o ndk.zip https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
+          unzip -q ndk.zip -d "$RUNNER_TEMP" && rm ndk.zip
+          ndk="$RUNNER_TEMP/android-ndk-r25c"
+          bin="$ndk/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          curl -sSL https://download.savannah.gnu.org/releases/freetype/freetype-2.13.3.tar.xz | tar xJ
+          cd freetype-2.13.3
+          ./configure --host=aarch64-linux-android --prefix="$RUNNER_TEMP/freetype" --enable-static --disable-shared --with-pic \
+            --without-zlib --without-png --without-bzip2 --without-brotli --without-harfbuzz \
+            CC="$bin/clang --target=aarch64-linux-android21" AR="$bin/llvm-ar" RANLIB="$bin/llvm-ranlib" \
+            CFLAGS="-O2 -fPIC -ffunction-sections -fdata-sections"
+          make -j4 && make install
+          echo "ANDROID_NDK_R25=$ndk" >> "$GITHUB_ENV"
 
       - name: Build the static SDK
         working-directory: jfx
@@ -90,8 +116,33 @@ jobs:
             GRADLEW="bash gradlew"
             EXTRA_ARGS=
           fi
+          case "${{ matrix.target }}" in
+            android-aarch64)
+              EXTRA_ARGS="-PCOMPILE_TARGETS=android -PANDROID_SDK=$ANDROID_SDK_ROOT -PANDROID_NDK=$ANDROID_NDK_R25 -PFREETYPE_DIR=$RUNNER_TEMP/freetype" ;;
+            ios-arm64)
+              # ios.gradle looks for the SDK of /Applications/Xcode.app by version
+              EXTRA_ARGS="-PCOMPILE_TARGETS=ios -PIOS_VERSION=$(xcrun --sdk iphoneos --show-sdk-version)" ;;
+          esac
           $GRADLEW -version
           $GRADLEW --info --no-daemon -PSTATIC_BUILD=true -PCOMPILE_MEDIA=false -PCOMPILE_WEBKIT=false $EXTRA_ARGS sdk
+
+      # The mobile SDKs are built into <os>-sdk and get the same sdk/ layout as the desktop ones.
+      # Android's FreeType archives are not copied into the SDK by the build, iOS names its archives
+      # by variant (libglass_arm64.a)
+      - name: Assemble the mobile SDK
+        if: matrix.target == 'android-aarch64' || matrix.target == 'ios-arm64'
+        working-directory: jfx/build
+        shell: bash
+        run: |
+          set -x
+          rm -rf sdk
+          if [ "${{ matrix.target }}" = "android-aarch64" ]; then
+            cp -r android-sdk sdk
+            cp ../modules/javafx.graphics/build/libs/fontNativeFreetype/android/libjavafx_font_freetype.a "$RUNNER_TEMP/freetype/lib/libfreetype.a" sdk/lib/
+          else
+            cp -r ios-sdk sdk
+            for a in sdk/lib/lib*_arm64.a; do mv "$a" "${a%_arm64.a}.a"; done
+          fi
 
       # Individual system libs in the Gluon Substrate format/layout
       - name: Package the SDK
@@ -174,4 +225,4 @@ jobs:
           (cd combined && zip -qr "../$zip_name" .)
           gh release create "$tag" "$zip_name" artifacts/*/*.zip --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease \
             --title "Static JavaFX $version ($GITHUB_REF_NAME)" \
-            --notes "Statically linked JavaFX SDK of every desktop platform, built from $GITHUB_SHA on $GITHUB_REF_NAME."
+            --notes "Statically linked JavaFX SDK of every platform, built from $GITHUB_SHA on $GITHUB_REF_NAME."
