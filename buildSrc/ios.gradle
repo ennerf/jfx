@@ -104,7 +104,7 @@ def linkFlags = [
     "-framework", "OpenGLES"].flatten()
 
 def ccFlags = [
-    "-miphoneos-version-min=6.0", "-fmessage-length=0", "-std=c99", "-fno-common",
+    "-miphoneos-version-min=15.0", "-fmessage-length=0", "-std=c99", "-fno-common",
     "-Wall", "-fno-strict-aliasing", "-fwrapv", "-fpascal-strings", "-fobjc-abi-version=2", "-fobjc-legacy-dispatch",
     "-I$JDK_HOME/include", "-I$JDK_HOME/include/darwin", "-c",
     IS_DEBUG_NATIVE ? ["-O0", "-DDEBUG", "-g"] : ["-O3", "-DNDEBUG"]].flatten()
@@ -125,7 +125,7 @@ ios.prism.static.libraries=true
 ios.prism.useNativeIIO=false"""
 
 IOS.glass = [:]
-IOS.glass.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.glass.variants = ["arm64"];
 IOS.glass.javahInclude = [
     "com/sun/glass/events/**",
     "com/sun/glass/ui/*",
@@ -165,7 +165,7 @@ IOS.glass.x86_64.linkFlags = ["-arch_only", archX86_64, "-syslibroot", sdkPath(i
 IOS.glass.x86_64.lib = "glass_${archX86_64}"
 
 IOS.decora = [:]
-IOS.decora.variants = ["arm", "arm64"];
+IOS.decora.variants = ["arm64"];
 IOS.decora.lib = "decora_sse"
 
 IOS.decora.arm = [:]
@@ -185,7 +185,7 @@ IOS.decora.arm64.lib = "decora_sse_${archArm64}"
 IOS.prism = [:]
 IOS.prism.lib = "prism_common"
 IOS.prism.javahInclude = ["com/sun/prism/impl/**/*", "com/sun/prism/PresentableState*"]
-IOS.prism.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.prism.variants = ["arm64"];
 
 IOS.prism.arm = [:]
 IOS.prism.arm.nativeSource = file("${project("graphics").projectDir}/src/main/native-prism")
@@ -222,7 +222,7 @@ IOS.prism.x86_64.lib = "prism_common_${archX86_64}"
 IOS.prismSW = [:]
 IOS.prismSW.lib = "prism_sw"
 IOS.prismSW.javahInclude = ["com/sun/pisces/**/*"]
-IOS.prismSW.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.prismSW.variants = ["arm64"];
 
 IOS.prismSW.arm = [:]
 IOS.prismSW.arm.nativeSource = file("${project("graphics").projectDir}/src/main/native-prism-sw")
@@ -259,7 +259,7 @@ IOS.prismSW.x86_64.lib = "prism_sw_${archX86_64}"
 IOS.iio = [:]
 IOS.iio.lib = "javafx_iio"
 IOS.iio.javahInclude = ["com/sun/javafx/iio/**/*"]
-IOS.iio.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.iio.variants = ["arm64"];
 
 IOS.iio.arm = [:]
 IOS.iio.arm.nativeSource = [
@@ -299,7 +299,7 @@ IOS.iio.x86_64.lib = "javafx_iio_${archX86_64}"
 IOS.prismES2 = [:]
 IOS.prismES2.lib = "prism_es2"
 IOS.prismES2.javahInclude = ["com/sun/prism/es2/**/*"]
-IOS.prismES2.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.prismES2.variants = ["arm64"];
 
 IOS.prismES2.arm = [:]
 IOS.prismES2.arm.nativeSource = [
@@ -343,7 +343,7 @@ IOS.font.lib = "javafx_font"
 IOS.font.javahInclude = [
         "com/sun/javafx/font/**/*",
         "com/sun/javafx/text/**/*"]
-IOS.font.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.font.variants = ["arm64"];
 
 IOS.font.arm = [:]
 IOS.font.arm.nativeSource = [file("${project("graphics").projectDir}/src/main/native-font")]
@@ -380,7 +380,7 @@ IOS.font.x86_64.lib = "javafx_font_${archX86_64}"
 IOS.webview = [:]
 IOS.webview.lib = "webview"
 IOS.webview.javahInclude = ["javafx/scene/web/*"]
-IOS.webview.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.webview.variants = ["arm64"];
 
 IOS.webview.arm = [:]
 IOS.webview.arm.nativeSource = file("${project("web").projectDir}/src/ios/native")
@@ -419,7 +419,7 @@ IOS.media.lib = "jfxmedia"
 IOS.media.javahSource = files("${project("media").buildDir}/classes/main")
 IOS.media.javahClasspath = files("${project("media").buildDir}/classes/main")
 IOS.media.javahInclude = ["com/sun/media/jfxmediaimpl/*"]
-IOS.media.variants = ["arm", "arm64", "x86", "x86_64"];
+IOS.media.variants = ["arm64"];
 
 IOS.media.arm = [:]
 IOS.media.arm.nativeSource = [

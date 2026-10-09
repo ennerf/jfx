@@ -1420,6 +1420,9 @@ if (COMPILE_TARGETS != "") {
     COMPILE_TARGETS = tmp.collect { "${it.toLowerCase()}"}.join(",")
 }
 
+// Metal shaders and prism_mtl belong to the mac target, not to a Mac build host
+ext.IS_COMPILE_MTL = IS_MAC && COMPILE_TARGETS.split(",").contains("mac")
+
 // Sanity check the expected properties all exist
 compileTargets { t ->
     // Every platform must define these variables
@@ -1785,7 +1788,7 @@ void addJSL(Project project, String name, String pkg, List<String> addExports, C
     def generateShaders = project.task("generate${name}Shaders",
             dependsOn: compileCompilers) {
         doFirst {
-            if (IS_MAC) {
+            if (IS_COMPILE_MTL) {
                 mkdir "$project.buildDir/gensrc/mtl-headers"
             }
         }
@@ -1814,7 +1817,7 @@ void addJSL(Project project, String name, String pkg, List<String> addExports, C
     def compileMSLShaders = project.task("compile${name}MSLShaders",
             dependsOn: generateShaders,
             type: CompileMSLTask) {
-        enabled = IS_MAC
+        enabled = IS_COMPILE_MTL
         description = "Compile $name MSL files into .air files"
         matches = ".*\\.metal"
         output project.file("$project.buildDir/msl/$name/$pkg/mtl/msl")
@@ -2566,7 +2569,7 @@ project(":graphics") {
         addNative(project, "prismES2")
     }
 
-    if (IS_MAC) {
+    if (IS_COMPILE_MTL) {
         addNative(project, "prismMTL")
     }
 
@@ -2709,7 +2712,7 @@ project(":graphics") {
                 args += ["-i", sourceDir, "-o", destinationDir, "-t", "-pkg", "com/sun/scenario/effect"]
                 if (IS_WINDOWS) {
                     args += [ "-d3d" ]
-                } else if (IS_MAC) {
+                } else if (IS_COMPILE_MTL) {
                     args += [ "-mtl" ]
                 }
                 if (IS_LINUX | IS_INCLUDE_ES2) {
@@ -2727,7 +2730,7 @@ project(":graphics") {
     if (IS_WINDOWS) {
         nativeDecora.dependsOn(compileDecoraHLSLShaders)
     }
-    if (IS_MAC) {
+    if (IS_COMPILE_MTL) {
         nativeDecora.dependsOn(compileDecoraMSLShaders)
     }
     task cleanNativeDecora(type: Delete, group: "Build") {
@@ -2809,7 +2812,7 @@ project(":graphics") {
                 args = ["-i", sourceDir, "-o", destinationDir, "-t", "-pkg", "com/sun/prism"]
                 if (IS_WINDOWS) {
                     args += [ "-d3d" ]
-                } else if (IS_MAC) {
+                } else if (IS_COMPILE_MTL) {
                     args += [ "-mtl" ]
                 }
                 if (IS_LINUX | IS_INCLUDE_ES2) {
@@ -2820,7 +2823,7 @@ project(":graphics") {
         }
     }
 
-    if (IS_MAC) {
+    if (IS_COMPILE_MTL) {
         task compileMetalShaders(group: "Build") {
             description = "Compiles all .metal files in src/main/native-prism-mtl/msl"
             doLast {
@@ -2880,7 +2883,7 @@ project(":graphics") {
     }
     project.processShaders.dependsOn(initShaderDirs)
     nativePrism.dependsOn compilePrismHLSLShaders;
-    if (IS_MAC) {
+    if (IS_COMPILE_MTL) {
         nativePrism.dependsOn compilePrismMSLShaders;
     }
 
@@ -2889,7 +2892,7 @@ project(":graphics") {
     assemble.dependsOn nativeDecora
     processResources.dependsOn processDecoraShaders, processPrismShaders
 
-    if (IS_MAC) {
+    if (IS_COMPILE_MTL) {
         def copyShimsMetalLibTask = project.task("copyShimsMetalLib", type: Copy,
                 dependsOn: [project.tasks.getByName("compileFullJava"),
                             project.tasks.getByName("processResources")]) {
@@ -5881,7 +5884,7 @@ compileTargets { t ->
             if (IS_INCLUDE_ES2) {
                 libs += ['prismES2'];
             }
-            if (IS_MAC) {
+            if (IS_MAC && t.name == "mac") {
                 libs += ['prismMTL']
             }
             if (IS_COMPILE_PANGO) {
