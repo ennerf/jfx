@@ -44,6 +44,10 @@ IOS.useLipo = Boolean.parseBoolean(USE_LIPO)
 defineProperty("GENERATE_SYMBOLS", "false")
 IOS.generateSymbols = Boolean.parseBoolean(GENERATE_SYMBOLS)
 
+// Builds the arm64 variant against the simulator SDK instead of the device SDK
+defineProperty("IOS_SIMULATOR", "false")
+IOS.simulator = Boolean.parseBoolean(IOS_SIMULATOR)
+
 defineProperty("BUILD_IOS_TOOLS", "true")
 ext.IS_BUILD_IOS_TOOLS = Boolean.parseBoolean(BUILD_IOS_TOOLS)
 
@@ -87,8 +91,8 @@ def archArm = "armv7"
 def archArm64 = "arm64"
 def archX86 = "i386"
 def archX86_64 = "x86_64"
-def iPhoneOS = "iPhoneOS"
 def iPhoneSim = "iPhoneSimulator"
+def iPhoneOS = IOS.simulator ? iPhoneSim : "iPhoneOS"
 
 String sdkPath(String platform) {
     return "/Applications/Xcode.app/Contents/Developer/Platforms/${platform}.platform/Developer/SDKs/${platform}${IOS_VERSION}.sdk";
@@ -104,7 +108,7 @@ def linkFlags = [
     "-framework", "OpenGLES"].flatten()
 
 def ccFlags = [
-    "-miphoneos-version-min=15.0", "-fmessage-length=0", "-std=c99", "-fno-common",
+    IOS.simulator ? "-mios-simulator-version-min=15.0" : "-miphoneos-version-min=15.0", "-fmessage-length=0", "-std=c99", "-fno-common",
     "-Wall", "-fno-strict-aliasing", "-fwrapv", "-fpascal-strings", "-fobjc-abi-version=2", "-fobjc-legacy-dispatch",
     "-I$JDK_HOME/include", "-I$JDK_HOME/include/darwin", "-c",
     IS_DEBUG_NATIVE ? ["-O0", "-DDEBUG", "-g"] : ["-O3", "-DNDEBUG"]].flatten()
