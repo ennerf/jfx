@@ -54,7 +54,7 @@ import java.util.Objects;
 
 import us.hebi.graalvm.reachability.annotations.Reachable;
 
-@Reachable(condition = MTLPipeline.class, classes = MTLResourceFactory.class, resources = "msl/jfxshaders.metallib")
+@Reachable(condition = MTLPipeline.class, classes = MTLResourceFactory.class)
 class MTLResourceFactory extends BaseShaderFactory {
 
     private final MTLContext context;

@@ -47,6 +47,9 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(resources = "msl/jfxshaders.metallib")
 class MTLContext extends BaseShaderContext {
 
     public static final int NUM_QUADS = PrismSettings.superShader ? 4096 : 256;
