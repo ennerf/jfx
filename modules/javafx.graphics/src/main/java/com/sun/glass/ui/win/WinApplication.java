@@ -46,8 +46,8 @@ import us.hebi.graalvm.reachability.annotations.Reachable;
 @Reachable(jniAccessible = true)
 @Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.directwrite.DWFactory")
 @Reachable(jniAccessible = true, classes = {
-        Boolean.class, Class.class, IllegalAccessException.class, Object.class,
-        Runnable.class, String.class, Throwable.class, java.io.IOException.class,
+        Boolean.class, Class.class, IllegalAccessException.class, IllegalStateException.class,
+        Object.class, Runnable.class, String.class, Throwable.class, java.io.IOException.class,
         java.util.Collections.class, java.util.HashMap.class, Map.class })
 final class WinApplication extends Application implements InvokeLaterDispatcher.InvokeLaterSubmitter {
 
