@@ -28,6 +28,9 @@ import com.sun.glass.ui.MenuBar;
 import com.sun.glass.ui.delegate.MenuBarDelegate;
 import com.sun.glass.ui.delegate.MenuDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinMenuBarDelegate extends WinMenuImpl implements MenuBarDelegate {
 
     final private MenuBar owner;

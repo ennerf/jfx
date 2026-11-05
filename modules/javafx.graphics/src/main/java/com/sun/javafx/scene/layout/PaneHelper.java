@@ -28,9 +28,12 @@ package com.sun.javafx.scene.layout;
 import com.sun.javafx.util.Utils;
 import javafx.scene.layout.Pane;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * Used to access internal methods of Pane.
  */
+@Reachable(classes = Pane.class, memberAccess = {})
 public class PaneHelper extends RegionHelper {
 
     private static final PaneHelper theInstance;

@@ -56,7 +56,10 @@ import javax.swing.JComponent;
 import jdk.swing.interop.DragSourceContextWrapper;
 import jdk.swing.interop.LightweightContentWrapper;
 import jdk.swing.interop.LightweightFrameWrapper;
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(classes = LightweightFrameWrapper.class, memberAccess = MemberAccess.ALL_DECLARED_METHODS) // Class.forName + OptionalMethod getMethod probes
 public class SwingNodeInteropN {
 
     private volatile LightweightFrameWrapper lwFrame;

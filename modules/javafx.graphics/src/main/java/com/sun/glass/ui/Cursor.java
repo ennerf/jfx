@@ -26,6 +26,9 @@ package com.sun.glass.ui;
 
 import java.lang.annotation.Native;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class Cursor {
 
     @Native public final static int CURSOR_NONE = -1;

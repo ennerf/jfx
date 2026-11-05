@@ -31,9 +31,12 @@ import javafx.scene.Node;
 import javafx.stage.PopupWindow;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal window methods.
  */
+@Reachable(classes = PopupWindow.class, memberAccess = {})
 public class PopupWindowHelper extends WindowHelper {
     private static final PopupWindowHelper theInstance;
     private static PopupWindowAccessor popupWindowAccessor;

@@ -31,10 +31,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * A form data element, such as a byte array or a local file.
  */
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 abstract class FormDataElement {
 
     /**

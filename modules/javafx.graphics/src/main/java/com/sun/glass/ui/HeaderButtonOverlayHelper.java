@@ -29,6 +29,9 @@ import com.sun.javafx.scene.layout.RegionHelper;
 import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = HeaderButtonOverlay.class, memberAccess = {})
 final class HeaderButtonOverlayHelper extends RegionHelper {
 
     private static final HeaderButtonOverlayHelper theInstance = new HeaderButtonOverlayHelper();

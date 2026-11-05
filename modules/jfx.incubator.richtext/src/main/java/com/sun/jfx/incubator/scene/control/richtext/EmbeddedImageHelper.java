@@ -30,8 +30,10 @@ import java.util.List;
 import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.richtext.RichTextArea;
 import jfx.incubator.scene.control.richtext.model.EmbeddedImage;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /// Helper for the EmbeddedImage class.
+@Reachable(classes = EmbeddedImage.class, memberAccess = {})
 public class EmbeddedImageHelper {
 
     public interface Accessor {

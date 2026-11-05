@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.directwrite;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class DWRITE_MATRIX {
     float m11;
     float m12;

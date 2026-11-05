@@ -27,7 +27,9 @@ package com.sun.webkit.network;
 
 import java.lang.annotation.Native;
 import java.nio.ByteBuffer;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 abstract class URLLoaderBase {
     @Native public static final int ALLOW_UNASSIGNED = java.net.IDN.ALLOW_UNASSIGNED;
 

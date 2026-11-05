@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of MoveTo.
  */
+@Reachable(classes = MoveTo.class, memberAccess = {})
 public class MoveToHelper extends PathElementHelper {
 
     private static final MoveToHelper theInstance;

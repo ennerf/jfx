@@ -26,7 +26,9 @@
 package com.sun.webkit;
 
 import java.lang.annotation.Native;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public final class ContextMenuItem {
     @Native public static final int ACTION_TYPE = 0;
     @Native public static final int SEPARATOR_TYPE = 1;

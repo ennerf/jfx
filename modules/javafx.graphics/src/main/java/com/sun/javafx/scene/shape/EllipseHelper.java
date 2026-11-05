@@ -33,9 +33,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Ellipse.
  */
+@Reachable(classes = Ellipse.class, memberAccess = {})
 public class EllipseHelper extends ShapeHelper {
 
     private static final EllipseHelper theInstance;

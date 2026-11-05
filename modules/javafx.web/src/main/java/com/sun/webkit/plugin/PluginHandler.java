@@ -26,7 +26,9 @@
 package com.sun.webkit.plugin;
 
 import java.net.URL;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 interface PluginHandler {
     String getName();
     String getFileName();

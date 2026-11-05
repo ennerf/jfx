@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.directwrite;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class D2D1_PIXEL_FORMAT {
     int format;
     int alphaMode;

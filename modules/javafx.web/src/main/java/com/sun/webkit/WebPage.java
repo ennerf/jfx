@@ -62,6 +62,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import netscape.javascript.JSException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * This class provides two-side interaction between native webkit core and
@@ -76,6 +77,14 @@ import org.w3c.dom.Element;
  * </ul>
  */
 
+@Reachable(jniAccessible = true)
+@Reachable(jniAccessible = true, classes = { // types the jfxwebkit native library looks up with FindClass
+        Boolean.class, Byte.class, Character.class, Double.class, Float.class, Integer.class,
+        JSException.class, Long.class, NullPointerException.class, Number.class, Object.class,
+        Short.class, String.class, java.awt.Toolkit.class, java.net.IDN.class,
+        org.w3c.dom.DOMException.class })
+@Reachable(jniAccessible = true, classNames = {
+        "com.sun.webkit.dom.EventListenerImpl", "com.sun.webkit.dom.NodeImpl" }) // JavaDOMUtils.cpp, JavaEventListener.cpp
 public final class WebPage {
     private final static PlatformLogger log = PlatformLogger.getLogger(WebPage.class.getName());
     private final static PlatformLogger paintLog = PlatformLogger.getLogger(WebPage.class.getName() + ".paint");

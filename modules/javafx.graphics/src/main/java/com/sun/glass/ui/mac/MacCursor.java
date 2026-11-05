@@ -28,9 +28,12 @@ import com.sun.glass.ui.Cursor;
 import com.sun.glass.ui.Pixels;
 import com.sun.glass.ui.Size;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MacOSX platform implementation class for Cursor.
  */
+@Reachable(jniAccessible = true)
 final class MacCursor extends Cursor {
 
     private native static void _initIDs();

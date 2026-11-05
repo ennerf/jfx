@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.PathElement;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of LineTo.
  */
+@Reachable(classes = LineTo.class, memberAccess = {})
 public class LineToHelper extends PathElementHelper {
 
     private static final LineToHelper theInstance;

@@ -28,7 +28,9 @@ package com.sun.webkit;
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.javafx.logging.PlatformLogger.Level;
 import com.sun.webkit.graphics.WCRectangle;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 class WCWidget {
     private final static PlatformLogger log = PlatformLogger.getLogger(WCWidget.class.getName());
 

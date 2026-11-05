@@ -27,6 +27,8 @@ package com.sun.pisces;
 
 import com.sun.prism.impl.Disposer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * PiscesRenderer class is basic public API accessing Pisces library capabilities.
  *
@@ -71,6 +73,7 @@ import com.sun.prism.impl.Disposer;
  *      }<br/>
  *  </code>
  */
+@Reachable(jniAccessible = true)
 public final class PiscesRenderer {
 
     public static final int ARC_OPEN = 0;

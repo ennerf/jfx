@@ -28,9 +28,12 @@ package com.sun.javafx.scene.text;
 import com.sun.javafx.util.Utils;
 import javafx.scene.text.Font;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Font.
  */
+@Reachable(classes = Font.class, memberAccess = {})
 public class FontHelper {
 
     private static FontAccessor fontAccessor;

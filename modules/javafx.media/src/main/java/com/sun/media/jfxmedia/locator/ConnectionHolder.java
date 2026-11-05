@@ -39,11 +39,13 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Map;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Connection holders hold and maintain connection do different kinds of sources
  *
  */
+@Reachable(jniAccessible = true)
 public abstract class ConnectionHolder {
     private static int DEFAULT_BUFFER_SIZE = 4096;
 

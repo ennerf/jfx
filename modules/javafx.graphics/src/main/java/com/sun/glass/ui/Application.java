@@ -38,6 +38,9 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class Application {
 
     private final static String DEFAULT_NAME = "java";

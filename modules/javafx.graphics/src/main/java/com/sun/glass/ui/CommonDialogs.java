@@ -30,6 +30,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public class CommonDialogs {
 
     /**
@@ -58,6 +61,7 @@ public class CommonDialogs {
      *
      * @see #showFileChooser
      */
+    @Reachable(jniAccessible = true)
     public final static class ExtensionFilter {
         private final String description;
         private final List<String> extensions;
@@ -112,6 +116,7 @@ public class CommonDialogs {
     /**
      * An object representing the result of showing a file chooser dialog.
      */
+    @Reachable(jniAccessible = true)
     public final static class FileChooserResult {
         private final List<File> files;
         private final ExtensionFilter filter;

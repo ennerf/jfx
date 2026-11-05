@@ -36,11 +36,14 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * Used to access internal methods of Parent.
  * Note: ParentHelper needs to be a concrete class even though Parent is an
  * abstract class since user is allowed to subclass Parent.
  */
+@Reachable(classes = Parent.class, memberAccess = {})
 public class ParentHelper extends NodeHelper {
 
     private static final ParentHelper theInstance;

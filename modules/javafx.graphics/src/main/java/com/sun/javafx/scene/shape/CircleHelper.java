@@ -33,9 +33,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Circle.
  */
+@Reachable(classes = Circle.class, memberAccess = {})
 public class CircleHelper extends ShapeHelper {
 
     private static final CircleHelper theInstance;

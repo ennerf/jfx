@@ -28,9 +28,12 @@ package com.sun.javafx.scene.input;
 import com.sun.javafx.util.Utils;
 import javafx.scene.input.TouchPoint;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of TouchPoint.
  */
+@Reachable(classes = TouchPoint.class, memberAccess = {})
 public class TouchPointHelper {
 
     private static TouchPointAccessor touchPointAccessor;

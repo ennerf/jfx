@@ -82,6 +82,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Contains the stylesheet state for a single scene. This includes both the
  * Stylesheets defined on the Scene itself as well as a map of stylesheets for
@@ -123,6 +125,7 @@ import java.util.WeakHashMap;
  * flushed.
  */
 
+@Reachable(classNames = "sun.net.www.protocol.data.Handler", memberAccess = {}, resources = "/META-INF/services/java.net.spi.URLStreamHandlerProvider")
 final public class StyleManager {
 
     /**

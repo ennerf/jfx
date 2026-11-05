@@ -30,6 +30,9 @@ import com.sun.glass.ui.Pixels;
 import com.sun.glass.ui.delegate.MenuDelegate;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class MacMenuDelegate implements MenuDelegate, MenuItemDelegate {
 
     private static native void _initIDs();

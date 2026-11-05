@@ -26,7 +26,9 @@
 package com.sun.webkit.graphics;
 
 import java.util.Arrays;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public final class WCTransform extends Ref {
     private final double[] m;
     private final boolean is3D;

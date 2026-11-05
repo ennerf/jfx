@@ -30,9 +30,12 @@ import com.sun.glass.ui.Window;
 
 import java.io.File;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MS Windows platform implementation class for CommonDialogs.
  */
+@Reachable(jniAccessible = true)
 final class WinCommonDialogs {
 
     private native static void _initIDs();

@@ -34,9 +34,12 @@ import javafx.geometry.Point3D;
 import javafx.scene.Camera;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Camera.
  */
+@Reachable(classes = Camera.class, memberAccess = {})
 public class CameraHelper extends NodeHelper {
 
     private static final CameraHelper theInstance;

@@ -31,8 +31,11 @@ import com.sun.prism.GraphicsPipeline;
 import com.sun.prism.ResourceFactory;
 import com.sun.prism.impl.PrismSettings;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 import java.util.List;
 
+@Reachable(jniAccessible = true, classes = D3DDriverInformation.class)
 public final class D3DPipeline extends GraphicsPipeline {
 
     private static final boolean d3dEnabled;

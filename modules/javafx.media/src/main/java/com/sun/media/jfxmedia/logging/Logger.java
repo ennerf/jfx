@@ -26,6 +26,7 @@
 package com.sun.media.jfxmedia.logging;
 
 import java.lang.annotation.Native;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Logger class used for logging that can output to console or file.<br/>
@@ -65,6 +66,7 @@ import java.lang.annotation.Native;
  * LOGGER_LOGMSG(LOGGER_DEBUG, "Initializing NativeMediaManager");<br/>
  * LOGGER_LOGMSG_CM(LOGGER_DEBUG, "None", "nativeInitNativeMediaManager", "Initializing NativeMediaManager");<br/>
  */
+@Reachable(jniAccessible = true)
 public class Logger {
 
     /**

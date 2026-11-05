@@ -43,12 +43,16 @@ import com.sun.scenario.effect.$effectName$;
 import com.sun.scenario.effect.impl.BufferUtil;
 import com.sun.scenario.effect.impl.HeapImage;
 import com.sun.scenario.effect.impl.Renderer;
+import com.sun.scenario.effect.impl.prism.sw.PSWRenderer;
 import com.sun.scenario.effect.impl.state.*;
 import com.sun.javafx.geom.Rectangle;
 import com.sun.javafx.geom.transform.BaseTransform;
 
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
+
 public class SSE$peerName$Peer extends SSEEffectPeer$genericsDecl$ $interfaceDecl$ {
 
+    @ReachableMember(condition = PSWRenderer.class)
     public SSE$peerName$Peer(FilterContext fctx, Renderer r, String uniqueName) {
         super(fctx, r, uniqueName);
     }

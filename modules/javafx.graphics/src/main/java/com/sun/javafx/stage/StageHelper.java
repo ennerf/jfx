@@ -29,10 +29,13 @@ import com.sun.javafx.util.Utils;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Utility class class used for accessing certain implementation-specific
  * runtime functionality.
  */
+@Reachable(classes = Stage.class, memberAccess = {})
 public class StageHelper extends WindowHelper {
 
     private static final StageHelper theInstance;

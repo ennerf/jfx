@@ -32,10 +32,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Specifies a property to which FXML ID values will be applied.
  *
  */
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS)
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)

@@ -28,6 +28,9 @@ import com.sun.glass.ui.Pixels;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class GtkPixels extends Pixels {
 
     public GtkPixels(int width, int height, ByteBuffer data) {

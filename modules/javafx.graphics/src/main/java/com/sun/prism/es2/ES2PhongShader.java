@@ -28,9 +28,13 @@ package com.sun.prism.es2;
 import java.util.HashMap;
 import java.util.Map;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * TODO: 3D - Need documentation
  */
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS)
 class ES2PhongShader {
 
     //dimensions:

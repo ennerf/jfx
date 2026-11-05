@@ -51,6 +51,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.WeakHashMap;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = ES2Pipeline.class, classes = ES2ResourceFactory.class, resources = { "glsl/*.frag", "glsl/*.vert" })
 public class ES2ResourceFactory extends BaseShaderFactory {
     private static final Map<Image,Texture> clampTexCache = new WeakHashMap<>();
     private static final Map<Image,Texture> repeatTexCache = new WeakHashMap<>();

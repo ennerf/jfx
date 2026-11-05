@@ -32,6 +32,9 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 public abstract class View {
 
     @Native public final static int GESTURE_NO_VALUE = Integer.MAX_VALUE;

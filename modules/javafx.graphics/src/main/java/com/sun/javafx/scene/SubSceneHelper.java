@@ -35,9 +35,12 @@ import javafx.scene.Camera;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of SubScene.
  */
+@Reachable(classes = SubScene.class, memberAccess = {})
 public class SubSceneHelper extends NodeHelper {
 
     private static final SubSceneHelper theInstance;

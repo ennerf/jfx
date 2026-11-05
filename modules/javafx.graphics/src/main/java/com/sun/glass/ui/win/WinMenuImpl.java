@@ -28,11 +28,14 @@ import com.sun.glass.ui.MenuItem;
 import com.sun.glass.ui.MenuItem.Callback;
 import com.sun.glass.ui.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * Base Windows menu implementation.
  * Used by WinMenuDelegate & WindowsMenubarDelegate.
  * This is package private class.
  */
+@Reachable(jniAccessible = true)
 class WinMenuImpl {
 
     private static native void _initIDs();

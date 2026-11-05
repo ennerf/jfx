@@ -33,6 +33,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class WinSystemClipboard extends SystemClipboard {
 
     private static native void initIDs();

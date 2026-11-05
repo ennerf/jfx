@@ -29,6 +29,15 @@ import com.sun.prism.impl.PrismSettings;
 import com.sun.javafx.PlatformUtil;
 import java.util.HashMap;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS, classNames = {
+        "com.sun.prism.es2.IOSGLFactory",
+        "com.sun.prism.es2.MacGLFactory",
+        "com.sun.prism.es2.MonocleGLFactory",
+        "com.sun.prism.es2.WinGLFactory",
+        "com.sun.prism.es2.X11GLFactory" })
 abstract class GLFactory {
 
     private static native boolean

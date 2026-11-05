@@ -52,9 +52,12 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.text.Font;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Node.
  */
+@Reachable(classes = Node.class, memberAccess = {})
 public abstract class NodeHelper {
     private static NodeAccessor nodeAccessor;
 

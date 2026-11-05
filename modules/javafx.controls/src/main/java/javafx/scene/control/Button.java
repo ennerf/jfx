@@ -34,6 +34,9 @@ import javafx.scene.Node;
 import javafx.css.PseudoClass;
 import javafx.scene.control.skin.ButtonSkin;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * <p>A simple button control.  The button control can contain
  * text and/or a graphic.  A button control has three different modes</p>
@@ -75,6 +78,7 @@ import javafx.scene.control.skin.ButtonSkin;
  *
  * @since JavaFX 2.0
  */
+@Reachable(classes = ButtonSkin.class, memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS)
 public class Button extends ButtonBase {
 
     /* *************************************************************************

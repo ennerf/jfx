@@ -35,10 +35,13 @@ import javafx.scene.AccessibleAttribute;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * This class is the Java peer for GlassTextRangeProvider.
  * GlassTextRangeProvider implements ITextRangeProvider.
  */
+@Reachable(jniAccessible = true)
 class WinTextRangeProvider {
 
     private native static void _initIDs();

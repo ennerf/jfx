@@ -28,11 +28,14 @@ package com.sun.glass.ui.ios;
 import com.sun.glass.ui.Cursor;
 import com.sun.glass.ui.Pixels;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * iOS platform implementation class of glass Cursor.
  * On iOS touch there is no cursor. Keeping this stub class as
  * a starting point for implementing cursor emulation if needed, etc.
  */
+@Reachable(jniAccessible = true)
 final class IosCursor extends Cursor {
     protected IosCursor(int type) {
         super(type);

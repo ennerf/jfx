@@ -40,6 +40,17 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.coretext.CTFactory")
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Class.class, Integer.class, Long.class, Object.class, Runnable.class,
+        RuntimeException.class, String.class, File.class,
+        java.util.ArrayList.class, java.util.Collections.class,
+        java.util.HashMap.class, java.util.List.class, Map.class })
+@Reachable(bundles = "/com.apple.Cocoa")
 final class MacApplication extends Application implements InvokeLaterDispatcher.InvokeLaterSubmitter {
 
     private native static void _initIDs(boolean disableSyncRendering);

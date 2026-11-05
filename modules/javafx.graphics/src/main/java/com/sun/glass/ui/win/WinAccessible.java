@@ -48,6 +48,8 @@ import com.sun.javafx.tk.TKStage;
 import com.sun.javafx.tk.quantum.WindowStage;
 import static javafx.scene.AccessibleAttribute.*;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * This class is the Java peer for GlassAccessible.
  * GlassAccessible implements all UIA interfaces required including:
@@ -66,6 +68,7 @@ import static javafx.scene.AccessibleAttribute.*;
  *
  */
 
+@Reachable(jniAccessible = true)
 final class WinAccessible extends Accessible {
 
     private native static void _initIDs();

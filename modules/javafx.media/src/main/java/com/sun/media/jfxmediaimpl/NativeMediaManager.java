@@ -38,10 +38,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.WeakHashMap;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * A class representing a native media engine.
  */
+// types the jfxmedia native library looks up with FindClass
+@Reachable(jniAccessible = true, classes = {
+        Boolean.class, Double.class, Exception.class, Integer.class, InternalError.class,
+        Long.class, Throwable.class, javafx.util.Duration.class })
 public class NativeMediaManager {
     /**
      * Whether the native layer has been initialized.

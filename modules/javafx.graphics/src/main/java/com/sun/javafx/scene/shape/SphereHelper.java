@@ -34,9 +34,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.shape.Sphere;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Sphere.
  */
+@Reachable(classes = Sphere.class, memberAccess = {})
 public class SphereHelper extends Shape3DHelper {
 
     private static final SphereHelper theInstance;

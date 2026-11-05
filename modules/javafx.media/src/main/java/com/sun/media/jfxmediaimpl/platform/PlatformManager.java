@@ -36,10 +36,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.lang.reflect.Method;
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Core media platform management code.
  */
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = {
+        "com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform",
+        "com.sun.media.jfxmediaimpl.platform.osx.OSXPlatform",
+        "com.sun.media.jfxmediaimpl.platform.ios.IOSPlatform" })
 public final class PlatformManager {
     private static String enabledPlatforms = getPlatformSettings();
 

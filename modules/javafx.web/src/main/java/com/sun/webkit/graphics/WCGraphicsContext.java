@@ -28,7 +28,9 @@ package com.sun.webkit.graphics;
 import java.nio.ByteBuffer;
 
 import com.sun.prism.paint.Color;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class WCGraphicsContext {
     // The constants are taken from WebCore/platform/graphics/GraphicsTypes.h
     public static final int COMPOSITE_CLEAR               = 0;

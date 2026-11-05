@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of PerspectiveCamera.
  */
+@Reachable(classes = PerspectiveCamera.class, memberAccess = {})
 public class PerspectiveCameraHelper extends CameraHelper {
 
     private static final PerspectiveCameraHelper theInstance;

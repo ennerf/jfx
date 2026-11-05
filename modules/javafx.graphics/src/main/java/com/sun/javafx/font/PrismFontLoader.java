@@ -36,6 +36,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(resources = "/META-INF/fonts.mf")
 public class PrismFontLoader extends FontLoader {
     private static PrismFontLoader theInstance = new PrismFontLoader();
     public static PrismFontLoader getInstance() { return theInstance; }

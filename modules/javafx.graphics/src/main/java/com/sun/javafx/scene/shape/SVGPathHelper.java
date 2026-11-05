@@ -31,9 +31,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of SVGPath.
  */
+@Reachable(classes = SVGPath.class, memberAccess = {})
 public class SVGPathHelper extends ShapeHelper {
 
     private static final SVGPathHelper theInstance;

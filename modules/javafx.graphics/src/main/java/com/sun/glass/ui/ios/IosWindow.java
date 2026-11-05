@@ -31,9 +31,12 @@ import com.sun.glass.ui.Screen;
 import com.sun.glass.ui.View;
 import com.sun.glass.ui.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * iOS platform Window implementation class.
  */
+@Reachable(jniAccessible = true)
 final class IosWindow extends Window {
     protected IosWindow(Window owner, Screen screen, int styleMask) {
         super(owner, screen, styleMask);

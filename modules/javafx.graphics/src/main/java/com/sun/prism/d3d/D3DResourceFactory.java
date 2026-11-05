@@ -58,6 +58,9 @@ import com.sun.prism.ps.Shader;
 import com.sun.prism.ps.ShaderFactory;
 import java.util.WeakHashMap;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = D3DPipeline.class, classes = D3DResourceFactory.class, resources = "hlsl/*.obj")
 class D3DResourceFactory extends BaseShaderFactory {
     private static final Map<Image,Texture> clampTexCache = new WeakHashMap<>();
     private static final Map<Image,Texture> repeatTexCache = new WeakHashMap<>();

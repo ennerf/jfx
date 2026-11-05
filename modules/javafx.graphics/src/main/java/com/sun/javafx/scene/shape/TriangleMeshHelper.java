@@ -33,9 +33,12 @@ import javafx.scene.shape.CullFace;
 import javafx.scene.shape.Mesh;
 import javafx.scene.shape.TriangleMesh;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of TriangleMesh.
  */
+@Reachable(classes = TriangleMesh.class, memberAccess = {})
 public class TriangleMeshHelper extends MeshHelper {
 
     private static final TriangleMeshHelper theInstance;

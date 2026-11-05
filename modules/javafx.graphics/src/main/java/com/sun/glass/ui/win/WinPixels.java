@@ -29,9 +29,12 @@ import com.sun.glass.ui.Pixels;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MS Windows platform implementation class for Pixels.
  */
+@Reachable(jniAccessible = true)
 final class WinPixels extends Pixels {
 
     private native static int _initIDs(); // returns the native format

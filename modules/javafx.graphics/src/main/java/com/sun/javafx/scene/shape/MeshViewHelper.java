@@ -34,9 +34,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.shape.MeshView;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of MeshView.
  */
+@Reachable(classes = MeshView.class, memberAccess = {})
 public class MeshViewHelper extends Shape3DHelper {
 
     private static final MeshViewHelper theInstance;

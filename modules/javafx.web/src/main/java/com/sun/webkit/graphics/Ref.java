@@ -25,6 +25,9 @@
 
 package com.sun.webkit.graphics;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public class Ref {
     private final int id;
     private int count;

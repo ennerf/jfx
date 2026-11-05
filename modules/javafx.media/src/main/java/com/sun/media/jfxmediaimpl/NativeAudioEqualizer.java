@@ -27,7 +27,9 @@ package com.sun.media.jfxmediaimpl;
 
 import com.sun.media.jfxmedia.effects.AudioEqualizer;
 import com.sun.media.jfxmedia.effects.EqualizerBand;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(jniAccessible = true, classes = NativeEqualizerBand.class) // NativeAudioEqualizer.cpp
 final class NativeAudioEqualizer implements AudioEqualizer {
     /**
      * Handle to the native equalizer.

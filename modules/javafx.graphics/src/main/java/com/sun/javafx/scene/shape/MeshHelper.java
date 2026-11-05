@@ -32,9 +32,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.CullFace;
 import javafx.scene.shape.Mesh;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Mesh.
  */
+@Reachable(classes = Mesh.class, memberAccess = {})
 public abstract class MeshHelper {
     private static MeshAccessor meshAccessor;
 

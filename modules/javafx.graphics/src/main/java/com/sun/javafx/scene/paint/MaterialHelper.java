@@ -30,10 +30,13 @@ import com.sun.javafx.util.Utils;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.paint.Material;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 
 /**
  * Used to access internal methods of Material.
  */
+@Reachable(classes = Material.class, memberAccess = {})
 public class MaterialHelper {
 
     private static MaterialAccessor materialAccessor;

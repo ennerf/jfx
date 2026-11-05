@@ -25,8 +25,13 @@
 
 package com.sun.prism.es2;
 
+import com.sun.javafx.logging.PulseLogger;
 import com.sun.prism.impl.PrismSettings;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true, classes = PulseLogger.class, memberAccess = MemberAccess.ALL_DECLARED_METHODS) // IOSGLContext.c
 class IOSGLContext extends GLContext {
 
     private static native long nInitialize(long nativeDInfo, long nativePFInfo,

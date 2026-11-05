@@ -35,6 +35,9 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.application.Platform;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class MonocleWindowManager {
 
     private static MonocleWindowManager instance = new MonocleWindowManager();

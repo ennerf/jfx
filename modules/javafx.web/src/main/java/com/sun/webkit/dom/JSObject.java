@@ -30,7 +30,9 @@ import com.sun.webkit.DisposerRecord;
 import com.sun.webkit.Invoker;
 import java.util.concurrent.atomic.AtomicInteger;
 import netscape.javascript.JSException;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true) // BridgeUtils.cpp
 class JSObject extends netscape.javascript.JSObject {
     private static final String UNDEFINED = new String("undefined");
     static final int JS_CONTEXT_OBJECT  = 0;

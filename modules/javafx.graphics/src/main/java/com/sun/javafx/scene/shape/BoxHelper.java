@@ -34,9 +34,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.shape.Box;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Box.
  */
+@Reachable(classes = Box.class, memberAccess = {})
 public class BoxHelper extends Shape3DHelper {
 
     private static final BoxHelper theInstance;

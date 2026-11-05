@@ -31,6 +31,9 @@ import jfx.incubator.scene.control.richtext.StyleResolver;
 import jfx.incubator.scene.control.richtext.model.RichTextFormatHandler;
 import jfx.incubator.scene.control.richtext.model.StyledOutput;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classes = RichTextFormatHandler.class, memberAccess = {})
 public class RichTextFormatHandlerHelper {
     public interface Accessor {
         public StyledOutput createStyledOutput(RichTextFormatHandler h, StyleResolver r, Writer wr);

@@ -44,6 +44,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.sun.glass.utils.NativeLibLoader;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Class AndroidFontFinder reads font descriptor from
  * /system/etc/system_fonts.xml. If that file doesn't exist it is replaced by
@@ -51,6 +53,7 @@ import com.sun.glass.utils.NativeLibLoader;
  * defines some basic mappings based on best guess which fonts are mandatory on
  * platforms lower than 4.0 and how they map to typefaces.
  */
+@Reachable(resources = "android_system_fonts.xml")
 class AndroidFontFinder {
 
     private final static String SYSTEM_FONT_NAME    = "sans serif";

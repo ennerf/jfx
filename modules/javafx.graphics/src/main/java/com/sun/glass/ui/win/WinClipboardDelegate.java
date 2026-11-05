@@ -27,6 +27,9 @@ package com.sun.glass.ui.win;
 import com.sun.glass.ui.Clipboard;
 import com.sun.glass.ui.delegate.ClipboardDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinClipboardDelegate implements ClipboardDelegate {
     @Override
     public Clipboard createClipboard(String clipboardName) {

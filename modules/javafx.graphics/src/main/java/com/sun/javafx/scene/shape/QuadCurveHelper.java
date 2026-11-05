@@ -31,9 +31,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of QuadCurve.
  */
+@Reachable(classes = QuadCurve.class, memberAccess = {})
 public class QuadCurveHelper extends ShapeHelper {
 
     private static final QuadCurveHelper theInstance;

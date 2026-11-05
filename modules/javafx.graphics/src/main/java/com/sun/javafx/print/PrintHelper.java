@@ -31,12 +31,15 @@ import javafx.print.PaperSource;
 import javafx.print.PrintResolution;
 import javafx.print.Printer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * An internal class which provides a way for implementation code to
  * access to package level protected constructors (etc).
  * All entry points to the printing API need to ensure this class is
  * loaded and initialized.
  */
+@Reachable(classes = Printer.class, memberAccess = {})
 public class PrintHelper {
     private static PrintAccessor printAccessor;
 

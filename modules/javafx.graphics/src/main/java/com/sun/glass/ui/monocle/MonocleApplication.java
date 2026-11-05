@@ -42,6 +42,10 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.List;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = "com.sun.javafx.font.freetype.FTFactory")
 public final class MonocleApplication extends Application {
 
     private final NativePlatform platform =

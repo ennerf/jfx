@@ -36,9 +36,12 @@ import com.sun.webkit.event.WCChangeListener;
 import com.sun.webkit.graphics.WCImage;
 
 import static com.sun.webkit.network.URLs.newURL;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public final class BackForwardList {
 
+    @Reachable(condition = WebPage.class, jniAccessible = true)
     public static final class Entry {
         /**
          * Native pointer to the HistoryItem object.

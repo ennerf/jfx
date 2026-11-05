@@ -28,11 +28,14 @@ package com.sun.glass.ui.ios;
 import com.sun.glass.ui.delegate.MenuBarDelegate;
 import com.sun.glass.ui.delegate.MenuDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 
 /**
  * MenuBarDelegate implementation stub for iOS.
  * Calling IosMenuBarDelegate's methods has no effect.
  */
+@Reachable(jniAccessible = true)
 final class IosMenuBarDelegate implements MenuBarDelegate {
 
     /**

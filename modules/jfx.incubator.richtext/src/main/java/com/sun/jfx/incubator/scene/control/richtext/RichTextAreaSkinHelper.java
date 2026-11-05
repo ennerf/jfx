@@ -31,9 +31,12 @@ import com.sun.jfx.incubator.scene.control.richtext.util.ListenerHelper;
 import jfx.incubator.scene.control.richtext.RichTextArea;
 import jfx.incubator.scene.control.richtext.skin.RichTextAreaSkin;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Manages RichTextAreaSkin Accessor.
  */
+@Reachable(classes = RichTextAreaSkin.class, memberAccess = {})
 public class RichTextAreaSkinHelper {
     public interface Accessor {
         public VFlow getVFlow(Skin<?> skin);

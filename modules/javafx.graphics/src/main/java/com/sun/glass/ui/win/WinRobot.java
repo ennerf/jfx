@@ -31,9 +31,12 @@ import javafx.scene.paint.Color;
 import com.sun.glass.ui.Application;
 import com.sun.glass.ui.GlassRobot;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * MS Windows platform implementation class for Robot.
  */
+@Reachable(jniAccessible = true)
 final class WinRobot extends GlassRobot {
 
     @Override

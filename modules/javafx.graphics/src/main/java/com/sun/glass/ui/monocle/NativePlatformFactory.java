@@ -25,7 +25,14 @@
 
 package com.sun.glass.ui.monocle;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /** Abstract factory class to instantiate a NativePlatform */
+@Reachable(classNames = {
+        "com.sun.glass.ui.monocle.AndroidPlatformFactory",
+        "com.sun.glass.ui.monocle.EGLPlatformFactory" },
+        memberAccess = MemberAccess.ALL_DECLARED_CONSTRUCTORS)
 public abstract class NativePlatformFactory {
 
     /**

@@ -34,7 +34,9 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.TreeMap;
 import java.util.Vector;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public final class PluginManager {
     private final static PlatformLogger log =
             PlatformLogger.getLogger("com.sun.browser.plugin.PluginManager");

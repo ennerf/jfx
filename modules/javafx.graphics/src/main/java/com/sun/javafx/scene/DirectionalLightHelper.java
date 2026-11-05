@@ -31,9 +31,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.DirectionalLight;
 import javafx.scene.Node;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of DirectionalLight.
  */
+@Reachable(classes = DirectionalLight.class, memberAccess = {})
 public class DirectionalLightHelper extends LightBaseHelper {
 
     private static final DirectionalLightHelper theInstance;

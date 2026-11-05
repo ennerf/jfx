@@ -35,7 +35,12 @@ import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
 import javafx.css.StyleableStringProperty;
 import java.util.Objects;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(classes = {
+        StyleableBooleanProperty.class, StyleableDoubleProperty.class, StyleableFloatProperty.class,
+        StyleableIntegerProperty.class, StyleableLongProperty.class, StyleableObjectProperty.class,
+        StyleableStringProperty.class }, memberAccess = {})
 public final class StyleablePropertyHelper {
 
     private StyleablePropertyHelper() {}

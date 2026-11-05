@@ -27,7 +27,9 @@ package com.sun.webkit.text;
 
 import java.lang.annotation.Native;
 import java.text.Normalizer;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 final class TextNormalizer {
 
     // Text normalization forms

@@ -36,7 +36,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(resources = "resources/*.png")
 public final class PrismGraphicsManager extends WCGraphicsManager {
 
     private final static float highestPixelScale;

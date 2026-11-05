@@ -30,6 +30,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(classNames = {
+        "com.sun.javafx.logging.PrintLogger",
+        "com.sun.javafx.logging.jfr.JFRPulseLogger" },
+        memberAccess = MemberAccess.ALL_DECLARED_METHODS)
 public class PulseLogger {
     public static final boolean PULSE_LOGGING_ENABLED;
 

@@ -33,9 +33,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Path.
  */
+@Reachable(classes = Path.class, memberAccess = {})
 public class PathHelper extends ShapeHelper {
 
     private static final PathHelper theInstance;

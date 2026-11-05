@@ -29,6 +29,9 @@ import com.sun.glass.ui.Pixels;
 import com.sun.glass.ui.delegate.MenuDelegate;
 import com.sun.glass.ui.delegate.MenuItemDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 final class WinMenuDelegate extends WinMenuImpl implements MenuDelegate {
 
     final private Menu owner;

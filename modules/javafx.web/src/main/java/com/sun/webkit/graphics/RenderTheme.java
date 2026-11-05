@@ -28,7 +28,9 @@ package com.sun.webkit.graphics;
 import java.nio.ByteBuffer;
 
 import java.lang.annotation.Native;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = com.sun.webkit.WebPage.class, jniAccessible = true)
 public abstract class RenderTheme extends Ref {
 
     @Native public static final int TEXT_FIELD = 0;

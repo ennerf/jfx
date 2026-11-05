@@ -29,9 +29,12 @@ import com.sun.javafx.util.Utils;
 import jfx.incubator.scene.control.richtext.Marker;
 import jfx.incubator.scene.control.richtext.TextPos;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Manages Marker Accessor.
  */
+@Reachable(classes = Marker.class, memberAccess = {})
 public class MarkerHelper {
     public interface Accessor {
         public Marker createMarker(TextPos p);

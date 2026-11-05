@@ -34,9 +34,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Shape;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Polyline.
  */
+@Reachable(classes = Polyline.class, memberAccess = {})
 public class PolylineHelper extends ShapeHelper {
 
     private static final PolylineHelper theInstance;

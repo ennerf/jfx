@@ -27,6 +27,9 @@ package com.sun.glass.ui.mac;
 import com.sun.glass.ui.delegate.MenuBarDelegate;
 import com.sun.glass.ui.delegate.MenuDelegate;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class MacMenuBarDelegate implements MenuBarDelegate {
 
     // NSMenu *

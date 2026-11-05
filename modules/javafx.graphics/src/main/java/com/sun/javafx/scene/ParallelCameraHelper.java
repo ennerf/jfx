@@ -30,9 +30,12 @@ import com.sun.javafx.util.Utils;
 import javafx.scene.Node;
 import javafx.scene.ParallelCamera;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of ParallelCamera.
  */
+@Reachable(classes = ParallelCamera.class, memberAccess = {})
 public class ParallelCameraHelper extends CameraHelper {
 
     private static final ParallelCameraHelper theInstance;

@@ -36,10 +36,12 @@ import java.nio.file.Path;
 import java.util.List;
 import java.lang.ref.WeakReference;
 import java.util.ListIterator;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
 /**
  * Utility functions.
  */
+@Reachable(jniAccessible = true)
 public class MediaUtils {
 
     /** Maximum number of bytes needed to scan the file signature. */

@@ -28,9 +28,12 @@ package com.sun.javafx.scene.control;
 import com.sun.javafx.util.Utils;
 import javafx.scene.control.TableColumnBase;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /*
  * Used to access internal TableColumnBase methods.
  */
+@Reachable(classes = TableColumnBase.class, memberAccess = {})
 public class TableColumnBaseHelper {
 
     private static TableColumnBaseAccessor tableColumnBaseAccessor;

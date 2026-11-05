@@ -31,9 +31,12 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.stage.Screen;
 import javafx.stage.Window;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal window methods.
  */
+@Reachable(classes = Window.class, memberAccess = {})
 public class WindowHelper {
     private static final WindowHelper theInstance;
     private static WindowAccessor windowAccessor;

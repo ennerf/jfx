@@ -36,9 +36,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Used to access internal methods of Region.
  */
+@Reachable(classes = Region.class, memberAccess = {})
 public class RegionHelper extends ParentHelper {
 
     private static final RegionHelper theInstance;

@@ -29,9 +29,12 @@ import com.sun.glass.ui.Pixels;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * iOS platform implementation class for Pixels.
  */
+@Reachable(jniAccessible = true)
 final class IosPixels extends Pixels {
 
     protected IosPixels(int width, int height, ByteBuffer data) {

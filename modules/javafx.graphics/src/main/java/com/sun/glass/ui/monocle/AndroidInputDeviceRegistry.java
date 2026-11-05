@@ -27,7 +27,10 @@ package com.sun.glass.ui.monocle;
 import com.sun.glass.ui.monocle.TouchState.Point;
 import javafx.application.Platform;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+
+@Reachable(jniAccessible = true)
 public class AndroidInputDeviceRegistry extends InputDeviceRegistry {
 
     private static AndroidInputDeviceRegistry instance = new AndroidInputDeviceRegistry();

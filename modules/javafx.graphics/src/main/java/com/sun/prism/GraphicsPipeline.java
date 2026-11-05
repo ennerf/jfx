@@ -38,6 +38,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+import us.hebi.graalvm.reachability.annotations.ReachableMember;
+
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS, classNames = {
+        "com.sun.prism.d3d.D3DPipeline",
+        "com.sun.prism.mtl.MTLPipeline",
+        "com.sun.prism.sw.SWPipeline" })
+@Reachable(memberAccess = { MemberAccess.ALL_DECLARED_CONSTRUCTORS, MemberAccess.ALL_DECLARED_METHODS },
+        classNames = "com.sun.prism.es2.ES2Pipeline")
 public abstract class GraphicsPipeline {
 
     public static enum ShaderType {
@@ -155,6 +165,7 @@ public abstract class GraphicsPipeline {
         return getPipeline().getDefaultResourceFactory(screens);
     }
 
+    @ReachableMember
     public FontFactory getFontFactory() {
         if (fontFactory == null) {
             fontFactory = PrismFontFactory.getFontFactory();
@@ -269,6 +280,7 @@ public abstract class GraphicsPipeline {
         return null;
     }
 
+    @ReachableMember
     public static GraphicsPipeline getPipeline() {
         return installedPipeline;
     }

@@ -25,6 +25,9 @@
 
 package com.sun.javafx.font.directwrite;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
 class D2D1_RENDER_TARGET_PROPERTIES {
     int type;
     D2D1_PIXEL_FORMAT pixelFormat = new D2D1_PIXEL_FORMAT();

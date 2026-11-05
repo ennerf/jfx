@@ -28,7 +28,11 @@ package com.sun.scenario.effect.impl.es2;
 import java.io.InputStream;
 import com.sun.scenario.effect.Effect.AccelType;
 import com.sun.scenario.effect.impl.hw.ShaderSource;
+import com.sun.prism.es2.ES2Pipeline;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(condition = ES2Pipeline.class, resources = "glsl/*.frag")
 public class ES2ShaderSource implements ShaderSource {
 
     public ES2ShaderSource() {

@@ -27,9 +27,12 @@ package com.sun.glass.ui;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * An object representing a nested event loop.
  */
+@Reachable(jniAccessible = true)
 public final class EventLoop {
 
     private static final Deque<EventLoop> stack = new ArrayDeque<>();

@@ -28,7 +28,9 @@ package com.sun.webkit;
 import com.sun.javafx.scene.control.CustomColorDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
+import us.hebi.graalvm.reachability.annotations.Reachable;
 
+@Reachable(condition = WebPage.class, jniAccessible = true)
 public final class ColorChooser {
     /**
      * Color conversion from double (0.0 to 1.0) to uchar (0 to 255)

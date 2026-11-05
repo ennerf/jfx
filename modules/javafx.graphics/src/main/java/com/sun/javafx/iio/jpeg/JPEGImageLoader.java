@@ -35,6 +35,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
+@Reachable(jniAccessible = true)
+@Reachable(jniAccessible = true, classes = { IOException.class, OutOfMemoryError.class })
 public class JPEGImageLoader extends ImageLoaderImpl {
 
     // IJG Color codes.

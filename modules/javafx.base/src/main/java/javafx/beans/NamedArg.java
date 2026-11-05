@@ -30,11 +30,15 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
+import us.hebi.graalvm.reachability.annotations.MemberAccess;
+import us.hebi.graalvm.reachability.annotations.Reachable;
+
 /**
  * Annotation that provides information about argument's name.
  *
  * @since JavaFX 8.0
  */
+@Reachable(memberAccess = MemberAccess.ALL_DECLARED_METHODS)
 @Retention(RUNTIME)
 @Target(PARAMETER)
 public @interface NamedArg {
